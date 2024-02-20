@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.34526.175
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "Email processes", "Email processes\Email processes.dtproj", "{2B659B37-7FAE-4303-8953-0F5F9AA524B0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2B659B37-7FAE-4303-8953-0F5F9AA524B0}.Development|Default.ActiveCfg = Development
+		{2B659B37-7FAE-4303-8953-0F5F9AA524B0}.Development|Default.Build.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B0D86267-28C4-4740-A2BD-7F4C8AB3F895}
+	EndGlobalSection
+EndGlobal
