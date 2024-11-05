@@ -1,0 +1,1659 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="1/30/2019 8:40:08 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="OMA-CSM20"
+  DTS:CreatorName="AMBERPHARMACY\Jwilliams"
+  DTS:DTSID="{49B481A8-B709-4023-B342-D8A486917F94}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.170"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Sublocade Delivery Emails"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="0"
+  DTS:VersionBuild="407"
+  DTS:VersionGUID="{00C94702-C024-443F-93E3-96D529236854}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ambromactrep01.Prod]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{7530565F-6738-4359-9791-E67CF53FB1DD}"
+      DTS:ObjectName="ambromactrep01.Prod">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=ambromactsql;Initial Catalog=CareTend_Amber_Prod;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ambromactsql.CareTend_Amber_Prod]"
+      DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      DTS:DTSID="{1B557F45-51A1-4BFA-A903-60754E9DD17E}"
+      DTS:ObjectName="ambromactsql.CareTend_Amber_Prod">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=ambromactsql;Initial Catalog=CareTend_Amber_Prod;Integrated Security=True;Application Name=SSIS-Azure Statements Upload Task-{1B557F45-51A1-4BFA-A903-60754E9DD17E}ambromactsql.CareTend_Amber_Prod;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ambromactsql.CareTend_Amber_Prod 1]"
+      DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      DTS:DTSID="{884613D7-E571-44BC-9E6E-E46627F6F367}"
+      DTS:ObjectName="ambromactsql.CareTend_Amber_Prod 1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=ambromactsql;Initial Catalog=CareTend_Amber_Prod;Integrated Security=True;Application Name=SSIS-Azure Statements Upload Task-{884613D7-E571-44BC-9E6E-E46627F6F367}ambromactsql.CareTend_Amber_Prod;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[EmailConnectionManager.mail.amberpharmacy.com]"
+      DTS:CreationName="EmailConnectionManager"
+      DTS:DTSID="{4A9CCB2C-D309-453C-B00F-E64CD0A48A71}"
+      DTS:ObjectName="EmailConnectionManager.mail.amberpharmacy.com">
+      <DTS:ObjectData>
+        <EmailConnectionManager
+          ConnectionString="OutgoingRequiresAuth=False;SMTPConnectionSetting=;SMTPConnectionUsername=;ConnectionRequiresSPA=False;MailAccountType=3;ServerAddress=mail.amberpharmacy.com;UserName=;ServerPort=25;RequiresSSLConnection=False;EncryptedConnectionType=0;ServerTimeout=60;RootFolder=;ReuseConnection=False;"
+          ConnectByProxy="False" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{E35D76E2-61ED-47A2-8B20-4FBF674D2E3C}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="AddressLine1">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{884D7D91-8DF7-4E84-BEAA-20005CCC7570}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="AddressLine2">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{5ED15A27-008C-4745-B935-EF3B9F8B7D23}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="CityState">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{1B607D3E-02A8-4C76-8CE8-A95A5530C854}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="DeliveryDate">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{6535F7AD-550E-4E78-A962-05344E07E5A0}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Drug">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{2B1423E0-12A1-4A6D-9A41-12E42C5CD9FC}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="EmailMessage">
+      <DTS:VariableValue
+        DTS:DataType="8">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"&gt;
+&lt;HTML&gt;&lt;HEAD&gt;
+&lt;META content="text/html; charset=unicode" http-equiv=Content-Type&gt;
+&lt;META name=GENERATOR content="MSHTML 11.00.9600.19204"&gt;&lt;/HEAD&gt;
+&lt;BODY&gt;&lt;/BODY&gt;&lt;/HTML&gt;
+</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{32E7F280-1D1B-4D6C-B829-04F14B028AC9}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ErrorEmailMessage">
+      <DTS:VariableValue
+        DTS:DataType="8">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"&gt;
+&lt;HTML&gt;&lt;HEAD&gt;
+&lt;META content="text/html; charset=unicode" http-equiv=Content-Type&gt;
+&lt;META name=GENERATOR content="MSHTML 11.00.9600.19204"&gt;&lt;/HEAD&gt;
+&lt;BODY&gt;&lt;/BODY&gt;&lt;/HTML&gt;
+</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{80C4905A-DF1F-44DB-92DB-CFB24FA46699}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FillDate">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{E59DC704-BDE8-4750-AF07-59636DB8CD77}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="intNewRxRowCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{8A27D9BA-F86F-4A0F-906E-339DA491424B}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="intRowCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{489278CE-70D9-4BDA-A542-AC4CA1DE5A34}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="NDC">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{CBBED22E-C0F2-4448-AA52-24917B597D8C}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="OrderResults">
+      <DTS:VariableValue
+        DTS:DataSubType="ManagedSerializable"
+        DTS:DataType="13">
+        <SOAP-ENV:Envelope xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <SOAP-ENV:Body>
+            <xsd:anyType
+              id="ref-1"></xsd:anyType>
+          </SOAP-ENV:Body>
+        </SOAP-ENV:Envelope>
+      </DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B0C3CD18-79D9-4445-9DE1-8C8CFDE0767D}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="PatientId">
+      <DTS:VariableValue
+        DTS:DataType="8">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A30DA04C-F2F0-4C83-96B6-0535085F5E13}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="PatientName">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C598E3C9-1AF4-4B6A-96A3-DE36621413A6}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Payer">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C1ED4A18-614E-438F-BC77-24CCE2F8A3DD}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="PrescriptionNumber">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{CB849A5C-94E2-4D97-9D54-F90C6C8C832B}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ProviderName">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{00210FA0-6345-44B8-9AFE-7E76D40033DC}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Quantity">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{98ED56AE-CF95-43EF-AE87-DC5B17279E58}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="GETDATE()"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="RunDate">
+      <DTS:VariableValue
+        DTS:DataType="7">11/5/2024 1:51:23 PM</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C828F233-230E-4368-A7C6-9BBEE973DE8D}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="RIGHT(&quot;0&quot; + (DT_STR, 2, 1252) DATEPART(&quot;mm&quot; , @[User::RunDate]), 2) + &quot;/&quot; + RIGHT(&quot;0&quot; + (DT_STR, 2, 1252) DATEPART(&quot;dd&quot; , @[User::RunDate]), 2) + &quot;/&quot; + (DT_STR, 4, 1252) DATEPART(&quot;yy&quot; , @[User::RunDate])"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="RunDateFormatted">
+      <DTS:VariableValue
+        DTS:DataType="8">11/05/2024</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{617DDFB2-0C71-414C-8FD2-CD743205136E}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ServiceType">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{79EBD77C-81D7-481C-A0A4-E1FAF7E0AEE6}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ShipMethod">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{25C4E39B-F399-428D-A264-0113ADEC3ACA}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="TicketId">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B153D776-B9A7-42CE-AAD7-59105F6CE888}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="TrackingNumber">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{1D2CF7DD-1A30-42C6-AFFE-83C72849EFE9}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Zip">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Get orders"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{47EFD03E-82A3-41A6-AA60-9D6D45AD09C9}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get orders"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{1B557F45-51A1-4BFA-A903-60754E9DD17E}"
+          SQLTask:SqlStatementSource="SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED&#xA; SELECT distinct Person.Id as PatientId,Person.FirstName + ' ' + Person.LastName as PatientName, convert(varchar, COALESCE(Ticket.StartPromisedDate,BackupDeliveryDate.StartPromisedDate), 1) as DeliveryDate, convert(varchar,MaxSequence.TargetCompoundingDate,1) as FillDate, Address.Line1  as AddressLine1,Address.Line2  as AddressLine2,&#xA; Address.PostalCode as Zip, Address.City + ', ' + State.Name as CityState, po.Name as 'DrugName', Prescription.PrescriptionNumber as Rx#,PrescriberPerson.FirstName + ' ' + PrescriberPerson.LastName  + ', ' + NameTitle.Name as Prescriber&#xA; ,Carrier.BillingOrganizationName as Payer,InventoryItemCode.Code as NDC,CONVERT(VARCHAR,dose.Quantity,1) AS Quantity,ShippingServiceType.Name as ServiceType,ShippingMethod.Name as ShipMethod&#xA; from  ambromactsql.[CareTend_Amber_Prod].Prescription.PatientOrder po &#xA;  INNER JOIN Ambromactsql.CareTend_Amber_Prod.Workflow.WorkflowHistory on WorkflowHistory.Reference_Id = po.Id&#xA;  AND WorkflowHistory.RecStatus = 1 &#xA;  INNER JOIN ambromactsql.[CareTend_Amber_Prod].Patient.Patient pt on pt.Id = po.Patient_Id&#xA;  INNER JOIN Common.Person on Person.Id = pt.Id&#xA;  INNER JOIN Common.Person PrescriberPerson on PrescriberPerson.Id = po.Provider_Id&#xA;  LEFT JOIN Lookups.NameTitle ON NameTitle.Id = PrescriberPerson.Title_Id&#xA;  INNER JOIN Delivery.Ticket on Ticket.Id = po.WorkingTicket_Id&#xA; LEFT JOIN Delivery.Ticket BackupDeliveryDate on BackupDeliveryDate.Id = Ticket.Parent_Id&#xA;  INNER JOIN Prescription.Prescription on Prescription.PatientOrder_Id = po.Id&#xA;  AND Prescription.Status_Id = 1&#xA;  INNER JOIN Patient.PatientPolicy on PatientPolicy.Id = po.PatientPolicy_Id&#xA;  INNER JOIN Insurance.Carrier on Carrier.Id = PatientPolicy.Carrier_Id&#xA;  INNER JOIN Common.Address on Ticket.ShippingAddress_Id = Address.Id&#xA;  INNER JOIN Lookups.State on State.Id = Address.State_Id&#xA;  INNER JOIN Prescription.PrescriptionFill on PrescriptionFill.Prescription_Id = Prescription.Id&#xA;  CROSS APPLY (&#xA;&#x9;SELECT TOP 1 *&#xA;&#x9;FROM  Prescription.PrescriptionFill MaxFill&#xA;&#x9;WHERE MaxFill.Prescription_Id = PrescriptionFill.Prescription_Id&#xA;&#x9;&#x9;AND MaxFill.RecStatus = 1&#xA;&#x9;ORDER BY MaxFill.Sequence DESC&#xA;&#x9;) MaxSequence&#xA;  INNER JOIN Prescription.PrescriptionFillDose dose on dose.PrescriptionFill_Id = MaxSequence.Id&#xA;  INNER JOIN Inventory.InventoryItemCode on InventoryItemCode.InventoryItem_Id = po.InventoryItem_Id&#xA;  INNER JOIN Lookups.ShippingMethod on Ticket.ShippingMethod_Id = ShippingMethod.Id&#xA;  INNER JOIN Lookups.ShippingServiceType on ShippingServiceType.Id = Ticket.RequestedShippingServiceType_Id&#xA;  AND InventoryItemCode.ItemCodeType_Id = 1&#xA; where &#xA;   (WorkflowHistory.ToWorkflowState_Id = 34&#xA;   or (WorkflowHistory.FromWorkflowState_Id = 32 &#xA;   and WorkflowHistory.ToWorkflowState_Id = 36))&#xA;  -- AND po.name like '%Sublocade%'&#xA; AND PatientPolicy.Carrier_Id in (4515734,4729785)&#xA;  AND WorkflowHistory.CreatedDate BETWEEN dateadd(MI,-5000,getutcdate()) and getutcdate()&#xA; AND NOT EXISTS (&#xA;SELECT 1&#xA;&#x9;&#x9;&#x9;FROM Amber.SublocadeEmailHistory&#xA;&#x9;&#x9;&#x9;WHERE SublocadeEmailHistory.Rx# = Prescription.PrescriptionNumber&#xA;&#x9;&#x9;&#x9;AND CONVERT(DATE,SublocadeEmailHistory.FillDate,1) = CAST(MaxSequence.TargetCompoundingDate AS DATE))"
+          SQLTask:ResultType="ResultSetType_Rowset" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::OrderResults" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load history table"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{BC2D8317-BBCA-4762-9106-82DDE12915F9}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load history table"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load history table\ADO NET Source"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Consumes data from SQL Server, OLE DB, ODBC, or Oracle, using the corresponding .NET Framework data provider. Use a Transact-SQL statement to define the result set. For example, extract data from SQL Server with the .NET Framework data provider for SQL Server.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="Consumes data from SQL Server, OLE DB, ODBC, or Oracle, using the corresponding .NET Framework data provider. Use a Transact-SQL statement to define the result set. For example, extract data from SQL Server with the .NET Framework data provider for SQL Server."
+              name="ADO NET Source"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement used by the component to extract data."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
+ SELECT distinct Person.Id as PatientId,Person.FirstName + ' ' + Person.LastName as PatientName, convert(varchar, COALESCE(Ticket.StartPromisedDate,BackupDeliveryDate.StartPromisedDate), 1) as DeliveryDate, convert(varchar,MaxSequence.TargetCompoundingDate,1) as FillDate, Address.Line1  as AddressLine1,Address.Line2  as AddressLine2,
+ Address.PostalCode as Zip, Address.City + ', ' + State.Name as CityState, po.Name as 'DrugName', Prescription.PrescriptionNumber as Rx#,PrescriberPerson.FirstName + ' ' + PrescriberPerson.LastName  + ', ' + NameTitle.Name as Prescriber,CASE WHEN Ticket.StartPromisedDate IS NULL THEN BackupDeliveryDate.Id ELSE Ticket.Id END AS TicketId, NULL AS TrackingNumber
+ ,Carrier.BillingOrganizationName as Payer,InventoryItemCode.Code as NDC,dose.Quantity,ShippingServiceType.Name as ServiceType,ShippingMethod.Name as ShipMethod
+ from  ambromactsql.[CareTend_Amber_Prod].Prescription.PatientOrder po 
+  INNER JOIN Ambromactsql.CareTend_Amber_Prod.Workflow.WorkflowHistory on WorkflowHistory.Reference_Id = po.Id
+  AND WorkflowHistory.RecStatus = 1 
+  INNER JOIN ambromactsql.[CareTend_Amber_Prod].Patient.Patient pt on pt.Id = po.Patient_Id
+  INNER JOIN Common.Person on Person.Id = pt.Id
+  INNER JOIN Common.Person PrescriberPerson on PrescriberPerson.Id = po.Provider_Id
+  LEFT JOIN Lookups.NameTitle ON NameTitle.Id = PrescriberPerson.Title_Id
+  INNER JOIN Delivery.Ticket on Ticket.Id = po.WorkingTicket_Id
+LEFT JOIN Delivery.Ticket BackupDeliveryDate on BackupDeliveryDate.Id = Ticket.Parent_Id
+  INNER JOIN Prescription.Prescription on Prescription.PatientOrder_Id = po.Id
+  AND Prescription.Status_Id = 1
+  INNER JOIN Patient.PatientPolicy on PatientPolicy.Id = po.PatientPolicy_Id
+  INNER JOIN Insurance.Carrier on Carrier.Id = PatientPolicy.Carrier_Id
+  INNER JOIN Common.Address on Ticket.ShippingAddress_Id = Address.Id
+  INNER JOIN Lookups.State on State.Id = Address.State_Id
+  INNER JOIN Prescription.PrescriptionFill on PrescriptionFill.Prescription_Id = Prescription.Id
+  CROSS APPLY (
+	SELECT TOP 1 *
+	FROM  Prescription.PrescriptionFill MaxFill
+	WHERE MaxFill.Prescription_Id = PrescriptionFill.Prescription_Id
+		AND MaxFill.RecStatus = 1
+	ORDER BY MaxFill.Sequence DESC
+	) MaxSequence
+  INNER JOIN Prescription.PrescriptionFillDose dose on dose.PrescriptionFill_Id = MaxSequence.Id
+  INNER JOIN Inventory.InventoryItemCode on InventoryItemCode.InventoryItem_Id = po.InventoryItem_Id
+  INNER JOIN Lookups.ShippingMethod on Ticket.ShippingMethod_Id = ShippingMethod.Id
+  INNER JOIN Lookups.ShippingServiceType on ShippingServiceType.Id = Ticket.RequestedShippingServiceType_Id
+  AND InventoryItemCode.ItemCodeType_Id = 1
+ where 
+   (WorkflowHistory.ToWorkflowState_Id = 34
+   or (WorkflowHistory.FromWorkflowState_Id = 32 
+   and WorkflowHistory.ToWorkflowState_Id = 36))
+  -- AND po.name like '%Sublocade%'
+ AND PatientPolicy.Carrier_Id in (4515734,4729785)
+  AND WorkflowHistory.CreatedDate BETWEEN dateadd(MI,-5000,getutcdate()) and getutcdate()
+  AND NOT EXISTS (
+		SELECT 1
+			FROM Amber.SublocadeEmailHistory
+			WHERE SublocadeEmailHistory.Rx# = Prescription.PrescriptionNumber
+			AND CONVERT(DATE,SublocadeEmailHistory.FillDate,1) = CAST(MaxSequence.TargetCompoundingDate AS DATE))</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether to allow non-string external columns to be implicitly converted to strings at the output columns."
+                  name="AllowImplicitStringConversion">true</property>
+                <property
+                  dataType="System.String"
+                  description="The Source database table name."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the mode to retrieve external column information"
+                  name="AccessMode"
+                  typeConverter="Microsoft.SqlServer.Dts.Pipeline.DataReaderSourceAdapter+EnumToStringConverter">2</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.DataReaderSourceAdapter</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load history table\ADO NET Source.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[ambromactsql.CareTend_Amber_Prod 1]"
+                  connectionManagerRefId="Package.ConnectionManagers[ambromactsql.CareTend_Amber_Prod 1]"
+                  description="Managed connection manager"
+                  name="IDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output]"
+                  name="ADO NET Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[PatientId]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[PatientId]"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[PatientId]"
+                      name="PatientId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[PatientName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[PatientName]"
+                      length="101"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[PatientName]"
+                      name="PatientName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[DeliveryDate]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[DeliveryDate]"
+                      length="30"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[DeliveryDate]"
+                      name="DeliveryDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[FillDate]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[FillDate]"
+                      length="30"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[FillDate]"
+                      name="FillDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[AddressLine1]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[AddressLine1]"
+                      length="55"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[AddressLine1]"
+                      name="AddressLine1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[AddressLine2]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[AddressLine2]"
+                      length="55"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[AddressLine2]"
+                      name="AddressLine2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[Zip]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Zip]"
+                      length="10"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[Zip]"
+                      name="Zip"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[CityState]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[CityState]"
+                      length="307"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[CityState]"
+                      name="CityState"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[DrugName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[DrugName]"
+                      length="100"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[DrugName]"
+                      name="DrugName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[Rx#]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Rx#]"
+                      length="50"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[Rx#]"
+                      name="Rx#"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[Prescriber]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Prescriber]"
+                      length="358"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[Prescriber]"
+                      name="Prescriber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[TicketId]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[TicketId]"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[TicketId]"
+                      name="TicketId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[TrackingNumber]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[TrackingNumber]"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[TrackingNumber]"
+                      name="TrackingNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[Payer]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Payer]"
+                      length="255"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[Payer]"
+                      name="Payer"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[NDC]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[NDC]"
+                      length="50"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[NDC]"
+                      name="NDC"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[Quantity]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Quantity]"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[Quantity]"
+                      name="Quantity"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[ServiceType]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[ServiceType]"
+                      length="255"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[ServiceType]"
+                      name="ServiceType"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[ShipMethod]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[ShipMethod]"
+                      length="255"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[ShipMethod]"
+                      name="ShipMethod"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[PatientId]"
+                      dataType="i8"
+                      name="PatientId" />
+                    <externalMetadataColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[PatientName]"
+                      dataType="wstr"
+                      length="101"
+                      name="PatientName" />
+                    <externalMetadataColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[DeliveryDate]"
+                      dataType="wstr"
+                      length="30"
+                      name="DeliveryDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[FillDate]"
+                      dataType="wstr"
+                      length="30"
+                      name="FillDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[AddressLine1]"
+                      dataType="wstr"
+                      length="55"
+                      name="AddressLine1" />
+                    <externalMetadataColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[AddressLine2]"
+                      dataType="wstr"
+                      length="55"
+                      name="AddressLine2" />
+                    <externalMetadataColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Zip]"
+                      dataType="wstr"
+                      length="10"
+                      name="Zip" />
+                    <externalMetadataColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[CityState]"
+                      dataType="wstr"
+                      length="307"
+                      name="CityState" />
+                    <externalMetadataColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[DrugName]"
+                      dataType="wstr"
+                      length="100"
+                      name="DrugName" />
+                    <externalMetadataColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Rx#]"
+                      dataType="wstr"
+                      length="50"
+                      name="Rx#" />
+                    <externalMetadataColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Prescriber]"
+                      dataType="wstr"
+                      length="358"
+                      name="Prescriber" />
+                    <externalMetadataColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[TicketId]"
+                      dataType="i8"
+                      name="TicketId" />
+                    <externalMetadataColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[TrackingNumber]"
+                      dataType="i4"
+                      name="TrackingNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Payer]"
+                      dataType="wstr"
+                      length="255"
+                      name="Payer" />
+                    <externalMetadataColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[NDC]"
+                      dataType="wstr"
+                      length="50"
+                      name="NDC" />
+                    <externalMetadataColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Quantity]"
+                      dataType="i4"
+                      name="Quantity" />
+                    <externalMetadataColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[ServiceType]"
+                      dataType="wstr"
+                      length="255"
+                      name="ServiceType" />
+                    <externalMetadataColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[ShipMethod]"
+                      dataType="wstr"
+                      length="255"
+                      name="ShipMethod" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output]"
+                  isErrorOut="true"
+                  name="ADO NET Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[PatientId]"
+                      dataType="i8"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[PatientId]"
+                      name="PatientId" />
+                    <outputColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[PatientName]"
+                      dataType="wstr"
+                      length="101"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[PatientName]"
+                      name="PatientName" />
+                    <outputColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[DeliveryDate]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[DeliveryDate]"
+                      name="DeliveryDate" />
+                    <outputColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[FillDate]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[FillDate]"
+                      name="FillDate" />
+                    <outputColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[AddressLine1]"
+                      dataType="wstr"
+                      length="55"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[AddressLine1]"
+                      name="AddressLine1" />
+                    <outputColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[AddressLine2]"
+                      dataType="wstr"
+                      length="55"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[AddressLine2]"
+                      name="AddressLine2" />
+                    <outputColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Zip]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Zip]"
+                      name="Zip" />
+                    <outputColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[CityState]"
+                      dataType="wstr"
+                      length="307"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[CityState]"
+                      name="CityState" />
+                    <outputColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[DrugName]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[DrugName]"
+                      name="DrugName" />
+                    <outputColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Rx#]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Rx#]"
+                      name="Rx#" />
+                    <outputColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Prescriber]"
+                      dataType="wstr"
+                      length="358"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Prescriber]"
+                      name="Prescriber" />
+                    <outputColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[TicketId]"
+                      dataType="i8"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[TicketId]"
+                      name="TicketId" />
+                    <outputColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[TrackingNumber]"
+                      dataType="i4"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[TrackingNumber]"
+                      name="TrackingNumber" />
+                    <outputColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Payer]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Payer]"
+                      name="Payer" />
+                    <outputColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[NDC]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[NDC]"
+                      name="NDC" />
+                    <outputColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Quantity]"
+                      dataType="i4"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Quantity]"
+                      name="Quantity" />
+                    <outputColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ServiceType]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ServiceType]"
+                      name="ServiceType" />
+                    <outputColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ShipMethod]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ShipMethod]"
+                      name="ShipMethod" />
+                    <outputColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load history table\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Amber].[SublocadeEmailHistory]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load history table\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[ambromactrep01.Prod]"
+                  connectionManagerRefId="Package.ConnectionManagers[ambromactrep01.Prod]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PatientName]"
+                      cachedDataType="wstr"
+                      cachedLength="101"
+                      cachedName="PatientName"
+                      externalMetadataColumnId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PatientName]"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[PatientName]" />
+                    <inputColumn
+                      refId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DeliveryDate]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="DeliveryDate"
+                      externalMetadataColumnId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DeliveryDate]"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[DeliveryDate]" />
+                    <inputColumn
+                      refId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[FillDate]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="FillDate"
+                      externalMetadataColumnId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FillDate]"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[FillDate]" />
+                    <inputColumn
+                      refId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[AddressLine1]"
+                      cachedDataType="wstr"
+                      cachedLength="55"
+                      cachedName="AddressLine1"
+                      externalMetadataColumnId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AddressLine1]"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[AddressLine1]" />
+                    <inputColumn
+                      refId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[AddressLine2]"
+                      cachedDataType="wstr"
+                      cachedLength="55"
+                      cachedName="AddressLine2"
+                      externalMetadataColumnId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AddressLine2]"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[AddressLine2]" />
+                    <inputColumn
+                      refId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Zip]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="Zip"
+                      externalMetadataColumnId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Zip]"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[Zip]" />
+                    <inputColumn
+                      refId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CityState]"
+                      cachedDataType="wstr"
+                      cachedLength="307"
+                      cachedName="CityState"
+                      externalMetadataColumnId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CityState]"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[CityState]" />
+                    <inputColumn
+                      refId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DrugName]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="DrugName"
+                      externalMetadataColumnId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DrugName]"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[DrugName]" />
+                    <inputColumn
+                      refId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Rx#]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Rx#"
+                      externalMetadataColumnId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Rx#]"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[Rx#]" />
+                    <inputColumn
+                      refId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Prescriber]"
+                      cachedDataType="wstr"
+                      cachedLength="358"
+                      cachedName="Prescriber"
+                      externalMetadataColumnId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Prescriber]"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[Prescriber]" />
+                    <inputColumn
+                      refId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Payer]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Payer"
+                      externalMetadataColumnId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Payer]"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[Payer]" />
+                    <inputColumn
+                      refId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[NDC]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="NDC"
+                      externalMetadataColumnId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NDC]"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[NDC]" />
+                    <inputColumn
+                      refId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Quantity]"
+                      cachedDataType="i4"
+                      cachedName="Quantity"
+                      externalMetadataColumnId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Quantity]"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[Quantity]" />
+                    <inputColumn
+                      refId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ServiceType]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="ServiceType"
+                      externalMetadataColumnId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ServiceType]"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[ServiceType]" />
+                    <inputColumn
+                      refId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PatientId]"
+                      cachedDataType="i8"
+                      cachedName="PatientId"
+                      externalMetadataColumnId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PatientId]"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[PatientId]" />
+                    <inputColumn
+                      refId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[TicketId]"
+                      cachedDataType="i8"
+                      cachedName="TicketId"
+                      externalMetadataColumnId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TicketId]"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[TicketId]" />
+                    <inputColumn
+                      refId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[TrackingNumber]"
+                      cachedDataType="i4"
+                      cachedName="TrackingNumber"
+                      externalMetadataColumnId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TrackingNumber]"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[TrackingNumber]" />
+                    <inputColumn
+                      refId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ShipMethod]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="ShipMethod"
+                      externalMetadataColumnId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ShipMethod]"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[ShipMethod]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Id]"
+                      dataType="i8"
+                      name="Id" />
+                    <externalMetadataColumn
+                      refId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PatientName]"
+                      dataType="wstr"
+                      length="101"
+                      name="PatientName" />
+                    <externalMetadataColumn
+                      refId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DeliveryDate]"
+                      dataType="wstr"
+                      length="30"
+                      name="DeliveryDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FillDate]"
+                      dataType="wstr"
+                      length="30"
+                      name="FillDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AddressLine1]"
+                      dataType="wstr"
+                      length="50"
+                      name="AddressLine1" />
+                    <externalMetadataColumn
+                      refId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AddressLine2]"
+                      dataType="wstr"
+                      length="50"
+                      name="AddressLine2" />
+                    <externalMetadataColumn
+                      refId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Zip]"
+                      dataType="wstr"
+                      length="10"
+                      name="Zip" />
+                    <externalMetadataColumn
+                      refId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CityState]"
+                      dataType="wstr"
+                      length="306"
+                      name="CityState" />
+                    <externalMetadataColumn
+                      refId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DrugName]"
+                      dataType="wstr"
+                      length="100"
+                      name="DrugName" />
+                    <externalMetadataColumn
+                      refId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Rx#]"
+                      dataType="wstr"
+                      length="50"
+                      name="Rx#" />
+                    <externalMetadataColumn
+                      refId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Prescriber]"
+                      dataType="wstr"
+                      length="358"
+                      name="Prescriber" />
+                    <externalMetadataColumn
+                      refId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Payer]"
+                      dataType="wstr"
+                      length="255"
+                      name="Payer" />
+                    <externalMetadataColumn
+                      refId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NDC]"
+                      dataType="wstr"
+                      length="50"
+                      name="NDC" />
+                    <externalMetadataColumn
+                      refId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Quantity]"
+                      dataType="i8"
+                      name="Quantity" />
+                    <externalMetadataColumn
+                      refId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ServiceType]"
+                      dataType="wstr"
+                      length="255"
+                      name="ServiceType" />
+                    <externalMetadataColumn
+                      refId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SentDate]"
+                      dataType="dbTimeStamp2"
+                      name="SentDate"
+                      scale="7" />
+                    <externalMetadataColumn
+                      refId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PatientId]"
+                      dataType="i8"
+                      name="PatientId" />
+                    <externalMetadataColumn
+                      refId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TicketId]"
+                      dataType="i8"
+                      name="TicketId" />
+                    <externalMetadataColumn
+                      refId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TrackingNumber]"
+                      dataType="wstr"
+                      length="255"
+                      name="TrackingNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ShipMethod]"
+                      dataType="wstr"
+                      length="255"
+                      name="ShipMethod" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load history table\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load history table\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load history table\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load history table\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load history table\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load history table.Paths[ADO NET Source Output]"
+              endId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="ADO NET Source Output"
+              startId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Precheck"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{97825A75-E9AE-4C8F-8AD5-5FF84C07B820}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Precheck"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{1B557F45-51A1-4BFA-A903-60754E9DD17E}"
+          SQLTask:SqlStatementSource="SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED&#xA; SELECT count(*)&#xA; from  ambromactsql.[CareTend_Amber_Prod].Prescription.PatientOrder po &#xA;  INNER JOIN Ambromactsql.CareTend_Amber_Prod.Workflow.WorkflowHistory on WorkflowHistory.Reference_Id = po.Id&#xA;  AND WorkflowHistory.RecStatus = 1 &#xA;  INNER JOIN ambromactsql.[CareTend_Amber_Prod].Patient.Patient pt on pt.Id = po.Patient_Id&#xA;  INNER JOIN Common.Person on Person.Id = pt.Id&#xA;  INNER JOIN Common.Person PrescriberPerson on PrescriberPerson.Id = po.Provider_Id&#xA;  LEFT JOIN Lookups.NameTitle ON NameTitle.Id = PrescriberPerson.Title_Id&#xA;  INNER JOIN Delivery.Ticket on Ticket.Id = po.WorkingTicket_Id&#xA; -- INNER JOIN Delivery.Ticket on Ticket.TicketNumber = WorkflowHistory.DeliveryTicketNumber&#xA;  INNER JOIN Prescription.Prescription on Prescription.PatientOrder_Id = po.Id&#xA;  AND Prescription.Status_Id = 1&#xA;  INNER JOIN Patient.PatientPolicy on PatientPolicy.Id = po.PatientPolicy_Id&#xA;  INNER JOIN Insurance.Carrier on Carrier.Id = PatientPolicy.Carrier_Id&#xA;  INNER JOIN Common.Address on Ticket.ShippingAddress_Id = Address.Id&#xA;  INNER JOIN Lookups.State on State.Id = Address.State_Id&#xA;  INNER JOIN Prescription.PrescriptionFill on PrescriptionFill.Prescription_Id = Prescription.Id&#xA;  CROSS APPLY (&#xA;&#x9;SELECT TOP 1 *&#xA;&#x9;FROM  Prescription.PrescriptionFill MaxFill&#xA;&#x9;WHERE MaxFill.Prescription_Id = PrescriptionFill.Prescription_Id&#xA;&#x9;&#x9;AND MaxFill.RecStatus = 1&#xA;&#x9;ORDER BY MaxFill.Sequence DESC&#xA;&#x9;) MaxSequence&#xA;  INNER JOIN Prescription.PrescriptionFillDose dose on dose.PrescriptionFill_Id = MaxSequence.Id&#xA;  INNER JOIN Inventory.InventoryItemCode on InventoryItemCode.InventoryItem_Id = po.InventoryItem_Id&#xA;  INNER JOIN Lookups.ShippingMethod on Ticket.ShippingMethod_Id = ShippingMethod.Id&#xA;  INNER JOIN Lookups.ShippingServiceType on ShippingServiceType.Id = Ticket.RequestedShippingServiceType_Id&#xA;  AND InventoryItemCode.ItemCodeType_Id = 1&#xA; where &#xA;   (WorkflowHistory.ToWorkflowState_Id = 34&#xA;   or (WorkflowHistory.FromWorkflowState_Id = 32 &#xA;   and WorkflowHistory.ToWorkflowState_Id = 36))&#xA;  -- AND po.name like '%Sublocade%'&#xA;AND PatientPolicy.Carrier_Id in (4515734,4729785)&#xA;  AND WorkflowHistory.CreatedDate BETWEEN dateadd(MI,-5000,getutcdate()) and getutcdate()&#xA; AND NOT EXISTS (&#xA;&#x9;&#x9;SELECT 1&#xA;&#x9;&#x9;&#x9;FROM Amber.SublocadeEmailHistory&#xA;&#x9;&#x9;&#x9;WHERE SublocadeEmailHistory.Rx# = Prescription.PrescriptionNumber&#xA;&#x9;&#x9;&#x9;AND CONVERT(DATE,SublocadeEmailHistory.FillDate,1) = CAST(MaxSequence.TargetCompoundingDate AS DATE))"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::intRowCount" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Send email to Diamond"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{8A9CD572-7E60-4E89-8FFD-9AAF7B2184AE}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Send email to Diamond">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachADOEnumerator"
+        DTS:DTSID="{CE43C74D-BB00-4171-86DD-742F0E0F87D5}"
+        DTS:ObjectName="{CE43C74D-BB00-4171-86DD-742F0E0F87D5}">
+        <DTS:ObjectData>
+          <FEEADO
+            EnumType="EnumerateRowsInFirstTable"
+            VarName="User::OrderResults" />
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Send email to Diamond\Amber Email"
+          DTS:CreationName="PW.TaskFactory.AdvancedEmailTask"
+          DTS:Description="TF Advanced Email and SMS Task"
+          DTS:DTSID="{5CECF1DF-7FF1-4B6C-A8C9-99858A173615}"
+          DTS:ExecutableType="PW.TaskFactory.AdvancedEmailTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Amber Email"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <AdvancedEmailTask
+              Message="&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot;&gt;&#xA;&lt;HTML xmlns:o = &quot;urn:schemas-microsoft-com:office:office&quot;&gt;&lt;HEAD&gt;&#xA;&lt;META content=&quot;text/html; charset=unicode&quot; http-equiv=Content-Type&gt;&#xA;&lt;META name=GENERATOR content=&quot;MSHTML 11.00.10570.1001&quot;&gt;&lt;/HEAD&gt;&#xA;&lt;BODY&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;FONT face=Calibri&gt;&lt;IMG &#xA;border=0 hspace=0 alt=&quot;&quot; &#xA;src=&quot;https://www.amberpharmacy.com/CorrespondenceImages/AmberLogoJPG.jpg&quot; &#xA;align=baseline&gt;&lt;/FONT&gt;&lt;FONT face=Calibri&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;An order has been processed &#xA;and set up for delivery. Please see below for further details:&lt;/P&gt;&lt;/FONT&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;FONT &#xA;face=Calibri&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;FONT face=Calibri&gt;Patient &#xA;Name:&lt;SPAN &#xA;style=&quot;mso-spacerun: yes&quot;&gt;&amp;nbsp;&lt;STRONG&gt;{{User::PatientName}}&lt;/STRONG&gt;&lt;/SPAN&gt;&lt;/FONT&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;FONT face=Calibri&gt;Shipping &#xA;Address Line 1:&lt;SPAN &#xA;style=&quot;mso-spacerun: yes&quot;&gt;&amp;nbsp;&lt;STRONG&gt;{{User::AddressLine1}}&lt;/STRONG&gt;&lt;/SPAN&gt;&lt;/FONT&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;FONT face=Calibri&gt;&lt;SPAN &#xA;style=&quot;mso-spacerun: yes&quot;&gt;Shipping Address Line 2:&lt;SPAN &#xA;style=&quot;mso-spacerun: yes&quot;&gt;&amp;nbsp;&lt;STRONG&gt;{{User::AddressLine2}}&lt;/STRONG&gt;&lt;/SPAN&gt;&lt;/SPAN&gt;&lt;/FONT&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;FONT face=Calibri&gt;&lt;SPAN &#xA;style=&quot;mso-spacerun: yes&quot;&gt;&lt;SPAN style=&quot;mso-spacerun: yes&quot;&gt;Shipping Address &#xA;City/State: &lt;STRONG&gt;{{User::CityState}}&lt;/STRONG&gt;&lt;/SPAN&gt;&lt;/SPAN&gt;&lt;/FONT&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;FONT face=Calibri&gt;&lt;SPAN &#xA;style=&quot;mso-spacerun: yes&quot;&gt;&lt;SPAN style=&quot;mso-spacerun: yes&quot;&gt;Shipping Address Zip: &#xA;&lt;STRONG&gt;{{User::Zip}}&lt;/STRONG&gt;&lt;/SPAN&gt;&lt;/SPAN&gt;&lt;/FONT&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;FONT face=Calibri&gt;&lt;SPAN &#xA;style=&quot;mso-spacerun: yes&quot;&gt;&lt;SPAN style=&quot;mso-spacerun: yes&quot;&gt;Drug: &#xA;&lt;STRONG&gt;{{User::Drug}}&lt;/STRONG&gt;&lt;/SPAN&gt;&lt;/SPAN&gt;&lt;/FONT&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;FONT face=Calibri&gt;&lt;SPAN &#xA;style=&quot;mso-spacerun: yes&quot;&gt;&lt;SPAN style=&quot;mso-spacerun: yes&quot;&gt;NDC: &#xA;&lt;STRONG&gt;{{User::NDC}}&lt;/STRONG&gt;&lt;/SPAN&gt;&lt;/SPAN&gt;&lt;/FONT&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;FONT face=Calibri&gt;Rx#: &#xA;&lt;STRONG&gt;{{User::PrescriptionNumber}}&lt;/STRONG&gt;&lt;/FONT&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;FONT face=Calibri&gt;Prescriber: &#xA;&lt;STRONG&gt;{{User::ProviderName}}&lt;/STRONG&gt;&lt;/FONT&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;FONT &#xA;face=Calibri&gt;Quantity:&lt;STRONG&gt; {{User::Quantity}}&lt;/STRONG&gt;&lt;/FONT&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;FONT face=Calibri&gt;Payer: &#xA;&lt;STRONG&gt;{{User::Payer}}&lt;/STRONG&gt;&lt;/FONT&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;FONT face=Calibri&gt;Ship &#xA;Method: &lt;STRONG&gt;{{User::ShipMethod}}&lt;/STRONG&gt;&lt;/FONT&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;FONT &#xA;face=Calibri&gt;ServiceType:&lt;STRONG&gt; {{User::ServiceType}}&lt;/STRONG&gt;&lt;/FONT&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;FONT &#xA;face=Calibri&gt;FillDate:&lt;STRONG&gt; {{User::FillDate}}&lt;/STRONG&gt;&lt;/FONT&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;FONT &#xA;face=Calibri&gt;DeliveryDate: &lt;STRONG&gt;{{User::DeliveryDate}}&lt;/STRONG&gt;&lt;/FONT&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;SPAN &#xA;style='FONT-SIZE: 10pt; FONT-FAMILY: &quot;Segoe UI&quot;,sans-serif; COLOR: black'&gt;&lt;o:p&gt;&lt;FONT &#xA;size=3 face=Calibri&gt;&amp;nbsp;&lt;/FONT&gt;&lt;/o:p&gt;&lt;/SPAN&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;SPAN &#xA;style='FONT-SIZE: 10pt; FONT-FAMILY: &quot;Segoe UI&quot;,sans-serif; COLOR: black'&gt;&lt;o:p&gt;&lt;FONT &#xA;size=3 face=Calibri&gt;Thank you,&lt;/FONT&gt;&lt;/o:p&gt;&lt;/SPAN&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;SPAN &#xA;style='FONT-SIZE: 10pt; FONT-FAMILY: &quot;Segoe UI&quot;,sans-serif; COLOR: black'&gt;&lt;o:p&gt;&lt;FONT &#xA;size=3 face=Calibri&gt;Amber Pharmacy&lt;/FONT&gt;&lt;/o:p&gt;&lt;/SPAN&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;SPAN &#xA;style='FONT-SIZE: 10pt; FONT-FAMILY: &quot;Segoe UI&quot;,sans-serif; COLOR: black'&gt;&lt;o:p&gt;&lt;FONT &#xA;size=3 face=Calibri&gt;888.370.1724&lt;/FONT&gt;&lt;/o:p&gt;&lt;/SPAN&gt;&lt;SPAN &#xA;style='FONT-SIZE: 10pt; FONT-FAMILY: &quot;Segoe UI&quot;,sans-serif; COLOR: black'&gt;&lt;o:p&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;A &#xA;href=&quot;http://www.amberpharmacy.com/&quot;&gt;&lt;FONT color=#0563c1 size=3 &#xA;face=Calibri&gt;www.amberpharmacy.com&lt;/FONT&gt;&lt;/A&gt;&lt;FONT size=3 face=Calibri&gt; &#xA;&lt;/FONT&gt;&lt;o:p&gt;&lt;/o:p&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;/o:p&gt;&lt;/SPAN&gt;&amp;nbsp;&lt;/P&gt;&#xA;&lt;P&gt;&amp;nbsp;&lt;/P&gt;&lt;/BODY&gt;&lt;/HTML&gt;&#xA;"
+              MessageSourceType="Direct_Input"
+              MessageSource=""
+              MailConnectionId="{4A9CCB2C-D309-453C-B00F-E64CD0A48A71}"
+              MailConnection="EmailConnectionManager.mail.amberpharmacy.com"
+              SendToType="Email"
+              Subject="Diamond delivery notification"
+              SendTo="SpecialtyMed@diamondpharmacy.com"
+              SendFrom="AscellaHealth@amberpharmacy.com  "
+              SendToCC=""
+              SendToBCC="JgWilliams@amberpharmacy.com;JFaulkner@amberpharmacy.com"
+              Priority="Normal"
+              Attachments=""
+              UsePlainText="False"
+              PlainTextMessage=""
+              LogFilePath="" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Send email to Diamond\Note Creation"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{4360935D-0C9D-4183-88D9-7CCBAC6E9503}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Note Creation"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{1B557F45-51A1-4BFA-A903-60754E9DD17E}"
+              SQLTask:SqlStatementSource="DECLARE @maxId int;&#xA;&#xA;SELECT @maxId = MAX(ID) FROM [Encounter].[PatientEncounter] WHERE PATIENT_ID = @PatientId&#xA;&#xA;IF (@maxId IS NOT NULL)&#xA;&#xA;BEGIN&#xA;&#xA;INSERT INTO [Encounter].[PatientNote](PatientEncounter_Id, PatientNoteType_Id, EnteredByEmployee_Id, &#xA;    EnteredDate, [Subject], Body, TherigyChangeIndex, TherigyId, ReferenceTable, ReferenceId, CreatedBy, CreatedDate) &#xA;  VALUES(@maxId, 1, 1,  GETUTCDATE(), 'Sent Diamond Delivery Email',  N'Diamond Delivery Email Sent', 0,'','',0, 1,  GETUTCDATE());&#xA;&#xA;END&#xA;     &#xA;GO " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="@PatientId"
+                SQLTask:DtsVariableName="User::PatientId"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="12"
+                SQLTask:ParameterSize="10" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Send email to Diamond.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{B3DF3352-112B-4E0A-9B58-EC34A5A9282B}"
+          DTS:From="Package\Send email to Diamond\Note Creation"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Send email to Diamond\Amber Email" />
+      </DTS:PrecedenceConstraints>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{D3A7C72B-361F-421F-BEF7-CE5A1FF18B09}"
+          DTS:ObjectName="{D3A7C72B-361F-421F-BEF7-CE5A1FF18B09}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::PatientId" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{E81C108B-CD74-4228-813E-A5DD25432E4A}"
+          DTS:ObjectName="{E81C108B-CD74-4228-813E-A5DD25432E4A}"
+          DTS:ValueIndex="1"
+          DTS:VariableName="User::PatientName" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{03E52E93-8052-44D1-9F18-3DA70502C53C}"
+          DTS:ObjectName="{03E52E93-8052-44D1-9F18-3DA70502C53C}"
+          DTS:ValueIndex="2"
+          DTS:VariableName="User::DeliveryDate" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{DE5800A8-3BF1-437B-8B4E-EEDF05D8CAA5}"
+          DTS:ObjectName="{DE5800A8-3BF1-437B-8B4E-EEDF05D8CAA5}"
+          DTS:ValueIndex="3"
+          DTS:VariableName="User::FillDate" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{626AD455-D1A1-46E6-9D49-B0987D91F1DA}"
+          DTS:ObjectName="{626AD455-D1A1-46E6-9D49-B0987D91F1DA}"
+          DTS:ValueIndex="4"
+          DTS:VariableName="User::AddressLine1" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{5C8FD82A-357C-42FA-833E-18A71C618489}"
+          DTS:ObjectName="{5C8FD82A-357C-42FA-833E-18A71C618489}"
+          DTS:ValueIndex="5"
+          DTS:VariableName="User::AddressLine2" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{9CA1FAE0-31ED-4974-8FC4-01ACC3C6D8E3}"
+          DTS:ObjectName="{9CA1FAE0-31ED-4974-8FC4-01ACC3C6D8E3}"
+          DTS:ValueIndex="6"
+          DTS:VariableName="User::Zip" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{95C63FB3-1CEF-47EF-B495-55CDB28136BF}"
+          DTS:ObjectName="{95C63FB3-1CEF-47EF-B495-55CDB28136BF}"
+          DTS:ValueIndex="7"
+          DTS:VariableName="User::CityState" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{D49CB144-8A5E-4A5B-BD7F-0D355B5ABECD}"
+          DTS:ObjectName="{D49CB144-8A5E-4A5B-BD7F-0D355B5ABECD}"
+          DTS:ValueIndex="8"
+          DTS:VariableName="User::Drug" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{42112471-E214-47C7-A298-C3A1D3F6D892}"
+          DTS:ObjectName="{42112471-E214-47C7-A298-C3A1D3F6D892}"
+          DTS:ValueIndex="9"
+          DTS:VariableName="User::PrescriptionNumber" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{5414A122-A0CA-435F-BED9-8A98AC33B15E}"
+          DTS:ObjectName="{5414A122-A0CA-435F-BED9-8A98AC33B15E}"
+          DTS:ValueIndex="10"
+          DTS:VariableName="User::ProviderName" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{8008D9A3-D26F-4AD1-A876-2767967E2EBD}"
+          DTS:ObjectName="{8008D9A3-D26F-4AD1-A876-2767967E2EBD}"
+          DTS:ValueIndex="11"
+          DTS:VariableName="User::Payer" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{B4CEC4CE-8575-4E70-822C-B2BD42582BC2}"
+          DTS:ObjectName="{B4CEC4CE-8575-4E70-822C-B2BD42582BC2}"
+          DTS:ValueIndex="12"
+          DTS:VariableName="User::NDC" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{6ADE268A-1E92-4CAE-AFF1-A8C964830621}"
+          DTS:ObjectName="{6ADE268A-1E92-4CAE-AFF1-A8C964830621}"
+          DTS:ValueIndex="13"
+          DTS:VariableName="User::Quantity" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{78E08912-C6C8-4758-8FEB-8F14149EBB34}"
+          DTS:ObjectName="{78E08912-C6C8-4758-8FEB-8F14149EBB34}"
+          DTS:ValueIndex="14"
+          DTS:VariableName="User::ServiceType" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{ED43BF78-8624-4DEC-B03B-7C5F68A9AA8B}"
+          DTS:ObjectName="{ED43BF78-8624-4DEC-B03B-7C5F68A9AA8B}"
+          DTS:ValueIndex="15"
+          DTS:VariableName="User::ShipMethod" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{DBAAB1C8-0A5B-45A9-A3BE-0AC70E609317}"
+      DTS:From="Package\Get orders"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Load history table" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{7DF28AEF-B756-48C9-B35E-B55A0B9FD9BF}"
+      DTS:EvalOp="1"
+      DTS:Expression="@[User::intRowCount] &gt; 0"
+      DTS:From="Package\Precheck"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Get orders" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{38A42759-5351-4C7E-811A-B7DE8D521DDA}"
+      DTS:From="Package\Load history table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Send email to Diamond" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="128,42"
+          Id="Package\Get orders"
+          TopLeft="316.178575518256,50.8288960004757" />
+        <NodeLayout
+          Size="166,42"
+          Id="Package\Load history table"
+          TopLeft="561.035716374082,79.900518046449" />
+        <NodeLayout
+          Size="122,42"
+          Id="Package\Precheck"
+          TopLeft="335.238100740679,0.188231639136166" />
+        <NodeLayout
+          Size="142,42"
+          Id="Package\Send email to Diamond\Amber Email"
+          TopLeft="206.87857528303,118.569872088619" />
+        <NodeLayout
+          Size="144,42"
+          Id="Package\Send email to Diamond\Note Creation"
+          TopLeft="197.999997131527,11.7543885577969" />
+        <EdgeLayout
+          Id="Package\Send email to Diamond.PrecedenceConstraints[Constraint]"
+          TopLeft="273.939286207279,53.7543885577969">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,64.8154835308221"
+              Start="0,0"
+              End="0,57.3154835308221">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,57.3154835308221" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="537,332"
+          Size="537,375"
+          Id="Package\Send email to Diamond"
+          TopLeft="148.035716374082,145.900518046449" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="444.178575518256,77.4955626671424">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="116.857140855826,23.4049553793066"
+              Start="0,0"
+              End="109.357140855826,23.4049553793066">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="45.3158576088807,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="45.3158576088807,0"
+                    Point2="49.3158576088807,0"
+                    Point3="49.3158576088807,4" />
+                  <mssgle:LineSegment
+                    End="49.3158576088807,19.4049553793066" />
+                  <mssgle:CubicBezierSegment
+                    Point1="49.3158576088807,19.4049553793066"
+                    Point2="49.3158576088807,23.4049553793066"
+                    Point3="53.3158576088807,23.4049553793066" />
+                  <mssgle:LineSegment
+                    End="109.357140855826,23.4049553793066" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="457.238100740679,21.1882316391362">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-13.059525222423,44.9739976946729"
+              Start="0,0"
+              End="-5.55952522242296,44.9739976946729">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="18.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="18.5,0"
+                    Point2="22.5,0"
+                    Point3="22.5,4" />
+                  <mssgle:LineSegment
+                    End="22.5,40.9739976946729" />
+                  <mssgle:CubicBezierSegment
+                    Point1="22.5,40.9739976946729"
+                    Point2="22.5,44.9739976946729"
+                    Point3="18.5,44.9739976946729" />
+                  <mssgle:LineSegment
+                    End="-5.55952522242296,44.9739976946729" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="14.5,-22,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="644.035716374082,121.900518046449">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-227.5,24"
+              Start="0,0"
+              End="-227.5,16.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,8.00000000000001" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,8.00000000000001"
+                    Point2="0,12"
+                    Point3="-4,12" />
+                  <mssgle:LineSegment
+                    End="-223.5,12" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-223.5,12"
+                    Point2="-227.5,12"
+                    Point3="-227.5,16" />
+                  <mssgle:LineSegment
+                    End="-227.5,16.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Load history table">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Load history table\OLE DB Destination"
+          TopLeft="325,164" />
+        <NodeLayout
+          Size="159,41"
+          Id="Package\Load history table\ADO NET Source"
+          TopLeft="241,77.4" />
+        <EdgeLayout
+          Id="Package\Load history table.Paths[ADO NET Source Output]"
+          TopLeft="320.5,118.4">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="90,45.6"
+              Start="0,0"
+              End="90,38.1">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.8" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,18.8"
+                    Point2="0,22.8"
+                    Point3="4,22.8" />
+                  <mssgle:LineSegment
+                    End="86,22.8" />
+                  <mssgle:CubicBezierSegment
+                    Point1="86,22.8"
+                    Point2="90,22.8"
+                    Point3="90,26.8" />
+                  <mssgle:LineSegment
+                    End="90,38.1" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load history table\ADO NET Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load history table\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

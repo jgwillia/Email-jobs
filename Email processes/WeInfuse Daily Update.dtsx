@@ -1,0 +1,748 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="2/9/2024 3:42:54 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="OMA-IT21"
+  DTS:CreatorName="AMBERPHARMACY\Jgwilliams"
+  DTS:DTSID="{B4230C43-D6FD-4518-9CEB-4997F2B1AB89}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.170"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="WeInfuse Daily Update"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="0"
+  DTS:VersionBuild="24"
+  DTS:VersionGUID="{0F6923CC-B279-492D-8320-189B9AD46B3C}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ambromactsql.CareTend_Amber_Prod]"
+      DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      DTS:DTSID="{453DE53F-74C6-47A6-A3A9-B7F9FA21FD14}"
+      DTS:ObjectName="ambromactsql.CareTend_Amber_Prod">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=ambromactsql;Initial Catalog=CareTend_Amber_Prod;Integrated Security=True;Application Name=SSIS-Azure Statements Upload Task-{453DE53F-74C6-47A6-A3A9-B7F9FA21FD14}ambromactsql.CareTend_Amber_Prod;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[EmailConnectionManager.mail.amberpharmacy.com]"
+      DTS:CreationName="EmailConnectionManager"
+      DTS:DTSID="{A081CD0A-6273-4A2D-9A23-D1F7A5298A43}"
+      DTS:ObjectName="EmailConnectionManager.mail.amberpharmacy.com">
+      <DTS:ObjectData>
+        <EmailConnectionManager
+          ConnectionString="OutgoingRequiresAuth=False;SMTPConnectionSetting=;SMTPConnectionUsername=;ConnectionRequiresSPA=False;MailAccountType=3;ServerAddress=mail.amberpharmacy.com;UserName=;ServerPort=25;RequiresSSLConnection=False;EncryptedConnectionType=0;ServerTimeout=60;RootFolder=;ReuseConnection=False;"
+          ConnectByProxy="False" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[TF Excel Connection]"
+      DTS:CreationName="ExcelConnectionTF"
+      DTS:DTSID="{A73078E1-F063-4AA9-96DB-A835B2E53107}"
+      DTS:ObjectName="TF Excel Connection">
+      <DTS:PropertyExpression
+        DTS:Name="FilePath">@[User::FilePath] +  @[User::StringRunDate] + @[User::FileFormat]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <ExcelConnectionManager
+          ConnectionString="FilePath=\\ambromafs03\shares\Reports\WeInfuse\DailyDetails\07312024.xlsx;"
+          ConnectByProxy="False" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{E759F26A-0DCD-4304-8767-80A3A7FC55C4}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="DailyOrderMadeReadyToFillCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{81DFF739-0A56-4DC4-A8D2-79008DEC51A6}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="DailyReferrals">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{802F1BAB-5E72-4C8C-A059-A8637776B460}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="DailyRefills">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{ADDE2711-101D-4364-83AA-6CF11302F448}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FileFormat">
+      <DTS:VariableValue
+        DTS:DataType="8">.xlsx</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{919A3A87-9244-44C0-87AC-79A762D97914}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FilePath">
+      <DTS:VariableValue
+        DTS:DataType="8">\\ambromafs03\shares\Reports\WeInfuse\DailyDetails\</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{80AA08F6-8057-4D18-A023-1CB17BB2E818}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="MonthlyReferrals">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{4BB2D7D0-C05F-4DC8-938D-4653072BEB5C}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="MonthlyRefills">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{187E4D09-ABA8-433C-BF62-FAE8AC0D416C}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ReferralData">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{29FF4076-1F06-43E7-8CFA-3185493FFB1A}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="RIGHT(&quot;0&quot; + (DT_STR, 2, 1252) DATEPART(&quot;mm&quot; , getdate()), 2) + &quot;/&quot; + RIGHT(&quot;0&quot; + (DT_STR, 2, 1252) DATEPART(&quot;dd&quot; , getdate()), 2) + &quot;/&quot; + (DT_STR, 4, 1252) DATEPART(&quot;yy&quot; , getdate())"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="RunDateFormatted">
+      <DTS:VariableValue
+        DTS:DataType="8">07/31/2024</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{560F1488-1AC2-4A54-AF75-77DDE0186249}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="(SUBSTRING( @[User::RunDateFormatted] ,1,2) + SUBSTRING( @[User::RunDateFormatted] ,4,2) + SUBSTRING( @[User::RunDateFormatted] ,7,4))"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="StringRunDate">
+      <DTS:VariableValue
+        DTS:DataType="8">07312024</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{4B2607B0-174A-48BA-A760-CD6ECEC32985}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="TotalReferrals">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{323ACD82-0CFB-4D43-8943-8542F38277BA}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="TotalRefills">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{03B98549-4CDC-42E3-9027-95E36A8897F9}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="WeeklyReferrals">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{BCE2F1CC-3F15-46E0-A72D-F1FA1B1DCEDE}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="WeeklyRefills">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Build report details"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{DC66D092-436D-4B04-B5F7-3A33E12E7FD5}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Build report details"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Build report details\Build details"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Consumes data from SQL Server, OLE DB, ODBC, or Oracle, using the corresponding .NET Framework data provider. Use a Transact-SQL statement to define the result set. For example, extract data from SQL Server with the .NET Framework data provider for SQL Server.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="Consumes data from SQL Server, OLE DB, ODBC, or Oracle, using the corresponding .NET Framework data provider. Use a Transact-SQL statement to define the result set. For example, extract data from SQL Server with the .NET Framework data provider for SQL Server."
+              name="Build details"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement used by the component to extract data."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT Patient.MedicalRecordNo,ReferralSource.OrganizationName AS ReferralSource,'Referral' AS DetailType FROM Patient.Patient
+INNER JOIN Common.Person ReferralSource on ReferralSource.Id = Patient.ReferralSource_Id
+WHERE Patient.Team_Id = 500043
+AND CAST(ReferralDate AS DATE) = CAST(GETDATE() AS DATE)
+
+UNION
+
+SELECT   Patient.MedicalRecordNo,ReferralSource.OrganizationName AS ReferralSource,'Refill' AS DetailType FROM  Patient.Patient
+INNER JOIN Common.Person ReferralSource on ReferralSource.Id = Patient.ReferralSource_Id
+INNER JOIN Prescription.PrescRiption on Prescription.Patient_Id = Patient.Id
+INNER JOIN Prescription.PrescriptionFill on PrescriptionFill.Prescription_Id = Prescription.Id
+where  CAST(ActualCompoundingDate AS DATE) = CAST(GETDATE() AS DATE)
+AND PrescriptionFill.Sequence != 1
+AND Patient.Team_Id = 500043
+
+UNION 
+
+SELECT   Patient.MedicalRecordNo,ReferralSource.OrganizationName AS ReferralSource,'Order Made Ready to Fill' AS DetailType FROM  Patient.Patient 
+INNER JOIN Common.Person ReferralSource on ReferralSource.Id = Patient.ReferralSource_Id
+INNER JOIN Prescription.PrescRiption on Prescription.Patient_Id = Patient.Id
+INNER JOIN Prescription.PrescriptionFill on PrescriptionFill.Prescription_Id = Prescription.Id
+AND PrescriptionFill.Sequence != 1
+where  CAST(PrescriptionFill.CreatedDate AS DATE) = CAST(GETDATE() AS DATE)
+AND Patient.Team_Id = 500043
+order by DetailType,ReferralSource</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether to allow non-string external columns to be implicitly converted to strings at the output columns."
+                  name="AllowImplicitStringConversion">true</property>
+                <property
+                  dataType="System.String"
+                  description="The Source database table name."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the mode to retrieve external column information"
+                  name="AccessMode"
+                  typeConverter="Microsoft.SqlServer.Dts.Pipeline.DataReaderSourceAdapter+EnumToStringConverter">2</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.DataReaderSourceAdapter</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Build report details\Build details.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[ambromactsql.CareTend_Amber_Prod]"
+                  connectionManagerRefId="Package.ConnectionManagers[ambromactsql.CareTend_Amber_Prod]"
+                  description="Managed connection manager"
+                  name="IDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Build report details\Build details.Outputs[ADO NET Source Output]"
+                  name="ADO NET Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Build report details\Build details.Outputs[ADO NET Source Output].Columns[MedicalRecordNo]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Build report details\Build details.Outputs[ADO NET Source Output].ExternalColumns[MedicalRecordNo]"
+                      length="50"
+                      lineageId="Package\Build report details\Build details.Outputs[ADO NET Source Output].Columns[MedicalRecordNo]"
+                      name="MedicalRecordNo"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Build report details\Build details.Outputs[ADO NET Source Output].Columns[ReferralSource]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Build report details\Build details.Outputs[ADO NET Source Output].ExternalColumns[ReferralSource]"
+                      length="200"
+                      lineageId="Package\Build report details\Build details.Outputs[ADO NET Source Output].Columns[ReferralSource]"
+                      name="ReferralSource"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Build report details\Build details.Outputs[ADO NET Source Output].Columns[DetailType]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Build report details\Build details.Outputs[ADO NET Source Output].ExternalColumns[DetailType]"
+                      length="24"
+                      lineageId="Package\Build report details\Build details.Outputs[ADO NET Source Output].Columns[DetailType]"
+                      name="DetailType"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Build report details\Build details.Outputs[ADO NET Source Output].ExternalColumns[MedicalRecordNo]"
+                      dataType="wstr"
+                      length="50"
+                      name="MedicalRecordNo" />
+                    <externalMetadataColumn
+                      refId="Package\Build report details\Build details.Outputs[ADO NET Source Output].ExternalColumns[ReferralSource]"
+                      dataType="wstr"
+                      length="200"
+                      name="ReferralSource" />
+                    <externalMetadataColumn
+                      refId="Package\Build report details\Build details.Outputs[ADO NET Source Output].ExternalColumns[DetailType]"
+                      dataType="wstr"
+                      length="24"
+                      name="DetailType" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Build report details\Build details.Outputs[ADO NET Source Error Output]"
+                  isErrorOut="true"
+                  name="ADO NET Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Build report details\Build details.Outputs[ADO NET Source Error Output].Columns[MedicalRecordNo]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Build report details\Build details.Outputs[ADO NET Source Error Output].Columns[MedicalRecordNo]"
+                      name="MedicalRecordNo" />
+                    <outputColumn
+                      refId="Package\Build report details\Build details.Outputs[ADO NET Source Error Output].Columns[ReferralSource]"
+                      dataType="wstr"
+                      length="200"
+                      lineageId="Package\Build report details\Build details.Outputs[ADO NET Source Error Output].Columns[ReferralSource]"
+                      name="ReferralSource" />
+                    <outputColumn
+                      refId="Package\Build report details\Build details.Outputs[ADO NET Source Error Output].Columns[DetailType]"
+                      dataType="wstr"
+                      length="24"
+                      lineageId="Package\Build report details\Build details.Outputs[ADO NET Source Error Output].Columns[DetailType]"
+                      name="DetailType" />
+                    <outputColumn
+                      refId="Package\Build report details\Build details.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Build report details\Build details.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Build report details\Build details.Outputs[ADO NET Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Build report details\Build details.Outputs[ADO NET Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Build report details\TF Excel Destination"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="TF Excel Destination;SolarWinds Worldwide, LLC; Task Factory (c) 2009 - 2021; https://www.solarwinds.com/company/contact-us"
+              description="TF Excel Destination"
+              name="TF Excel Destination"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  name="DebugMode">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="The first column to read data from"
+                  expressionType="Notify"
+                  name="Column Start">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="The first row to read data from"
+                  expressionType="Notify"
+                  name="Row Start">1</property>
+                <property
+                  dataType="System.String"
+                  description="The name of the worksheet to read data from"
+                  expressionType="Notify"
+                  name="Worksheet Name">Sheet1</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicated if the first row of data contains the column names"
+                  expressionType="Notify"
+                  name="First Row Contains Column Name">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Indicates which option to use to write the sheet data when existing data is in the destination sheet"
+                  expressionType="Notify"
+                  name="Existing Data Option"
+                  typeConverter="PragmaticWorks.TaskFactory.Components.Destination.Excel+ExistingDataOption">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Use this option to create a table based on the data written to the spreadsheet"
+                  expressionType="Notify"
+                  name="Create Table">false</property>
+                <property
+                  dataType="System.String"
+                  description="The name of the table being created"
+                  expressionType="Notify"
+                  name="Table Name"></property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether to create the table with auto filters"
+                  expressionType="Notify"
+                  name="Create Table Auto Filters">false</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">PragmaticWorks.TaskFactory.ExcelDestination</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Build report details\TF Excel Destination.Connections[EXCELCONNECTION]"
+                  connectionManagerID="Package.ConnectionManagers[TF Excel Connection]"
+                  connectionManagerRefId="Package.ConnectionManagers[TF Excel Connection]"
+                  description="Excel Connection"
+                  name="EXCELCONNECTION" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Build report details\TF Excel Destination.Inputs[Excel Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Excel Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Build report details\TF Excel Destination.Inputs[Excel Destination Input].Columns[ReferralSource]"
+                      cachedDataType="wstr"
+                      cachedLength="200"
+                      cachedName="ReferralSource"
+                      lineageId="Package\Build report details\Build details.Outputs[ADO NET Source Output].Columns[ReferralSource]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          expressionType="Notify"
+                          name="Excel Column Header">ReferralSource</property>
+                        <property
+                          dataType="System.String"
+                          expressionType="Notify"
+                          name="Excel Column Mapping">A</property>
+                        <property
+                          dataType="System.String"
+                          expressionType="Notify"
+                          name="Style"></property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Build report details\TF Excel Destination.Inputs[Excel Destination Input].Columns[DetailType]"
+                      cachedDataType="wstr"
+                      cachedLength="24"
+                      cachedName="DetailType"
+                      lineageId="Package\Build report details\Build details.Outputs[ADO NET Source Output].Columns[DetailType]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          expressionType="Notify"
+                          name="Excel Column Header">DetailType</property>
+                        <property
+                          dataType="System.String"
+                          expressionType="Notify"
+                          name="Excel Column Mapping">B</property>
+                        <property
+                          dataType="System.String"
+                          expressionType="Notify"
+                          name="Style"></property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Build report details\TF Excel Destination.Outputs[Excel Destination Error Output]"
+                  isErrorOut="true"
+                  name="Excel Destination Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Build report details\TF Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Build report details\TF Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Build report details\TF Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Build report details\TF Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                    <outputColumn
+                      refId="Package\Build report details\TF Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorDescription]"
+                      dataType="wstr"
+                      length="1024"
+                      lineageId="Package\Build report details\TF Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorDescription]"
+                      name="ErrorDescription" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Build report details.Paths[ADO NET Source Output]"
+              endId="Package\Build report details\TF Excel Destination.Inputs[Excel Destination Input]"
+              name="ADO NET Source Output"
+              startId="Package\Build report details\Build details.Outputs[ADO NET Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Get counts"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{CB6D2213-BF23-48EA-BAB1-EA9D237CE0C6}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get counts"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{453DE53F-74C6-47A6-A3A9-B7F9FA21FD14}"
+          SQLTask:SqlStatementSource="CREATE TABLE #EligiblePatients&#xA;(&#xA;DailyReferralCount BIGINT,&#xA;WeeklyReferralCount BIGINT,&#xA;MonthlyReferralCount BIGINT,&#xA;TotalReferralCount BIGINT,&#xA;DailyRefillCount BIGINT,&#xA;DailyOrderMadeReadyToFillCount BIGINT,&#xA;WeeklyRefillCount BIGINT,&#xA;MonthlyRefillCount BIGINT,&#xA;TotalRefillCount BIGINT&#xA;)&#xA;&#xA;INSERT INTO #EligiblePatients&#xA;SELECT SUM(DailyReferralCount),&#xA; SUM(WeeklyReferralCount),&#xA; SUM(MonthlyReferralCount),&#xA; COUNT(DISTINCT MedicalRecordNo),&#xA; SUM(DailyRefillCount),&#xA; SUM(DailyOrderMadeReadyToFillCount),&#xA; SUM(WeeklyRefillCount),&#xA; SUM(MonthlyRefillCount),&#xA; SUM(TotalRefillCount) + 214&#xA;&#xA;FROM (&#xA;SELECT DISTINCT Patient.MedicalRecordNo,CAST(Patient.ReferralDate AS DATE) AS ReferralDate,ReferralSource.OrganizationName as ReferralSource&#xA;,CASE WHEN cast(ReferralDate as date) = CAST(GETDATE() AS DATE) THEN 1 ELSE 0 END AS DailyReferralCount&#xA;,CASE WHEN DATEPART(WEEK,ReferralDate) = DATEPART(WEEK,GETDATE()) AND YEAR(ReferralDate) = YEAR(GETDATE()) THEN 1 ELSE 0 END AS WeeklyReferralCount&#xA;,CASE WHEN  MONTH(ReferralDate) = MONTH(GETDATE()) AND YEAR(ReferralDate) = YEAR(GETDATE())  THEN 1 ELSE 0 END AS MonthlyReferralCount&#xA;,CASE WHEN cast(ActualCompoundingDate as date) = CAST(GETDATE() AS DATE) THEN 1 ELSE 0 END AS DailyRefillCount&#xA;,CASE WHEN CAST(PrescriptionFill.CreatedDate AS DATE) = CAST(GETDATE() AS DATE) THEN 1 ELSE 0 END AS DailyOrderMadeReadyToFillCount&#xA;,CASE WHEN DATEPART(WEEK,ActualCompoundingDate) = DATEPART(WEEK,GETDATE()) AND YEAR(ActualCompoundingDate) = YEAR(GETDATE()) THEN 1 ELSE 0 END AS WeeklyRefillCount&#xA;,CASE WHEN  MONTH(ActualCompoundingDate) = MONTH(GETDATE()) AND YEAR(ActualCompoundingDate) = YEAR(GETDATE())  THEN 1 ELSE 0 END AS MonthlyRefillCount&#xA;,CASE WHEN PrescriptionFill.Id is not null  THEN 1 ELSE 0 END AS TotalRefillCount&#xA; FROM PATIENT.PATIENT&#xA;INNER JOIN Common.Person ReferralSource on ReferralSource.Id = Patient.ReferralSource_Id&#xA;left JOIN Prescription.PrescRiption on Prescription.Patient_Id = Patient.Id&#xA;left JOIN Prescription.PrescriptionFill on PrescriptionFill.Prescription_Id = Prescription.Id&#xA;AND PrescriptionFill.Sequence != 1&#xA;WHERE Patient.Team_Id = 500043&#xA;) A&#xA;&#xA;SELECT * FROM #EligiblePatients&#xA;&#xA;DROP TABLE #EligiblePatients"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::DailyReferrals" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="1"
+            SQLTask:DtsVariableName="User::WeeklyReferrals" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="2"
+            SQLTask:DtsVariableName="User::MonthlyReferrals" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="3"
+            SQLTask:DtsVariableName="User::TotalReferrals" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="4"
+            SQLTask:DtsVariableName="User::DailyRefills" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="6"
+            SQLTask:DtsVariableName="User::WeeklyRefills" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="7"
+            SQLTask:DtsVariableName="User::MonthlyRefills" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="8"
+            SQLTask:DtsVariableName="User::TotalRefills" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="5"
+            SQLTask:DtsVariableName="User::DailyOrderMadeReadyToFillCount" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Send Email"
+      DTS:CreationName="PW.TaskFactory.AdvancedEmailTask"
+      DTS:Description="TF Advanced Email and SMS Task"
+      DTS:DTSID="{83A12378-5986-4BB7-99BC-88936AE76D60}"
+      DTS:ExecutableType="PW.TaskFactory.AdvancedEmailTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Send Email"
+      DTS:TaskContact="Advanced Email and SMS Task; Task Factory © 2021 SolarWinds Worldwide, LLC; http://www.solarwinds.com;support@solarwinds.com"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:PropertyExpression
+        DTS:Name="Attachments">@[User::FilePath] +  @[User::StringRunDate] +  @[User::FileFormat]</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="Subject">"WeInfuse Daily Update -- " + @[User::StringRunDate]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <AdvancedEmailTask
+          Message="&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot;&gt;&#xA;&lt;HTML&gt;&lt;HEAD&gt;&#xA;&lt;META content=&quot;text/html; charset=unicode&quot; http-equiv=Content-Type&gt;&#xA;&lt;META name=GENERATOR content=&quot;MSHTML 11.00.10570.1001&quot;&gt;&lt;/HEAD&gt;&#xA;&lt;BODY&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;FONT &#xA;face=Calibri&gt;&lt;STRONG&gt;Totals:&lt;/STRONG&gt;&lt;/FONT&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;EM&gt;&lt;FONT &#xA;face=Calibri&gt;&lt;/FONT&gt;&lt;/EM&gt;&amp;nbsp;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;FONT face=Calibri&gt;Daily &#xA;Referrals: {{User::DailyReferrals}}&lt;/FONT&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;FONT &#xA;face=Calibri&gt;Weekly&amp;nbsp;Referrals: {{User::WeeklyReferrals}}&lt;/FONT&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;FONT face=Calibri&gt;Monthly &#xA;Referrals: {{User::MonthlyReferrals}}&lt;/FONT&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;FONT face=Calibri&gt;Total &#xA;Referrals: {{User::TotalReferrals}}&lt;/FONT&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;FONT &#xA;face=Calibri&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;FONT face=Calibri&gt;Daily &#xA;Refills: {{User::DailyRefills}}&lt;/FONT&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;FONT face=Calibri&gt;Weekly &#xA;Refills: {{User::WeeklyRefills}}&lt;/FONT&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;FONT face=Calibri&gt;Monthly &#xA;Refills: {{User::MonthlyRefills}}&lt;/FONT&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;FONT face=Calibri&gt;Total &#xA;Refills: {{User::TotalRefills}}&lt;/FONT&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;FONT &#xA;face=Calibri&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;FONT face=Calibri&gt;Daily Order &#xA;Made Ready to Fill Count: {{User::DailyOrderMadeReadyToFillCount}}&lt;/FONT&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;FONT &#xA;face=Calibri&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;FONT face=Calibri&gt;&lt;STRONG&gt;See &#xA;attached for daily referral, refill and order made ready to fill &#xA;breakdowns&lt;/STRONG&gt;&lt;/FONT&gt;&lt;/P&gt;&lt;/BODY&gt;&lt;/HTML&gt;&#xA;"
+          MessageSourceType="Direct_Input"
+          MessageSource=""
+          MailConnectionId="{A081CD0A-6273-4A2D-9A23-D1F7A5298A43}"
+          MailConnection="EmailConnectionManager.mail.amberpharmacy.com"
+          SendToType="Email"
+          Subject="WeInfuse Daily Update -- 07312024"
+          SendTo="jsempek@amberpharmacy.com;hwagner@amberpharmacy.com;aadams@amberpharmacy.com;choltgrave@amberpharmacy.com;DDempsey@amberpharmacy.com"
+          SendFrom="info@amberpharmacy.com"
+          SendToCC="GPicardo@amberpharmacy.com;Kwyant@amberpharmacy.com;accountengagement@amberpharmacy.com;ckerkhove@amberpharmacy.com"
+          SendToBCC="JWilliams@amberpharmacy.com"
+          Priority="Normal"
+          Attachments="\\ambromafs03\shares\Reports\WeInfuse\DailyDetails\07312024.xlsx"
+          UsePlainText="False"
+          PlainTextMessage=""
+          LogFilePath="" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{BD5BA50C-7BB4-42C1-9D73-302DC866F466}"
+      DTS:From="Package\Build report details"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Get counts" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{CD4C4B0D-6558-4787-ACFB-898D7E8D1AB2}"
+      DTS:From="Package\Get counts"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Send Email" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="168,42"
+          Id="Package\Build report details"
+          TopLeft="306,72" />
+        <NodeLayout
+          Size="130,42"
+          Id="Package\Get counts"
+          TopLeft="320,197" />
+        <NodeLayout
+          Size="135,42"
+          Id="Package\Send Email"
+          TopLeft="321,324" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="387.5,114">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,83"
+              Start="0,0"
+              End="0,75.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,75.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="386.75,239">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,85"
+              Start="0,0"
+              End="0,77.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,77.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Build report details">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="175,42"
+          Id="Package\Build report details\TF Excel Destination"
+          TopLeft="104,215" />
+        <NodeLayout
+          Size="138,42"
+          Id="Package\Build report details\Build details"
+          TopLeft="60,60" />
+        <EdgeLayout
+          Id="Package\Build report details.Paths[ADO NET Source Output]"
+          TopLeft="129,102">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="62.5,113"
+              Start="0,0"
+              End="62.5,105.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,52.5"
+                    Point2="0,56.5"
+                    Point3="4,56.5" />
+                  <mssgle:LineSegment
+                    End="58.5,56.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="58.5,56.5"
+                    Point2="62.5,56.5"
+                    Point3="62.5,60.5" />
+                  <mssgle:LineSegment
+                    End="62.5,105.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

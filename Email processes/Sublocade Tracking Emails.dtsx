@@ -1,0 +1,721 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="1/30/2019 8:40:08 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="OMA-CSM20"
+  DTS:CreatorName="AMBERPHARMACY\Jwilliams"
+  DTS:DTSID="{06BFF938-D497-47C3-831F-1F444708B4F4}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.170"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Sublocade Tracking Emails"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="0"
+  DTS:VersionBuild="401"
+  DTS:VersionGUID="{8E253595-7B1D-46E3-8A96-E856050C3C62}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ambromactrep01.Prod]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{E808CAC0-EA10-4094-9106-B7833B5074A0}"
+      DTS:ObjectName="ambromactrep01.Prod">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=ambromactsql;Initial Catalog=CareTend_Amber_Prod;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ambromactsql.CareTend_Amber_Prod]"
+      DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      DTS:DTSID="{069A273A-0DA3-4DFF-98EA-ED76AF728443}"
+      DTS:ObjectName="ambromactsql.CareTend_Amber_Prod">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=ambromactsql;Initial Catalog=CareTend_Amber_Prod;Integrated Security=True;Application Name=SSIS-Azure Statements Upload Task-{069A273A-0DA3-4DFF-98EA-ED76AF728443}ambromactsql.CareTend_Amber_Prod;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ambromactsql.CareTend_Amber_Prod 1]"
+      DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      DTS:DTSID="{AFA820CD-8EB2-4231-953B-9682E3D722F2}"
+      DTS:ObjectName="ambromactsql.CareTend_Amber_Prod 1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=ambromactsql;Initial Catalog=CareTend_Amber_Prod;Integrated Security=True;Application Name=SSIS-Azure Statements Upload Task-{AFA820CD-8EB2-4231-953B-9682E3D722F2}ambromactsql.CareTend_Amber_Prod;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[EmailConnectionManager.mail.amberpharmacy.com]"
+      DTS:CreationName="EmailConnectionManager"
+      DTS:DTSID="{5FD1F395-C15C-4175-8FA6-738C72745499}"
+      DTS:ObjectName="EmailConnectionManager.mail.amberpharmacy.com">
+      <DTS:ObjectData>
+        <EmailConnectionManager
+          ConnectionString="OutgoingRequiresAuth=False;SMTPConnectionSetting=;SMTPConnectionUsername=;ConnectionRequiresSPA=False;MailAccountType=3;ServerAddress=mail.amberpharmacy.com;UserName=;ServerPort=25;RequiresSSLConnection=False;EncryptedConnectionType=0;ServerTimeout=60;RootFolder=;ReuseConnection=False;"
+          ConnectByProxy="False" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{6D91E5C6-7D83-40E3-95B8-D2FFC29E6567}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="AddressLine1">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{74FC5129-2FF4-4721-91B1-84F379F2E4DA}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="AddressLine2">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{4F3BBCDB-BC77-4168-989C-C1DB7291850F}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="CityState">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{946171C9-E1EE-40BF-8B28-DA353D70B958}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="DeliveryDate">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B3D810B3-9EF9-42FC-924D-71593E38F386}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Drug">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{8E8CDC93-7D8D-4152-B255-F93632EBDA7F}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="EmailMessage">
+      <DTS:VariableValue
+        DTS:DataType="8">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"&gt;
+&lt;HTML&gt;&lt;HEAD&gt;
+&lt;META content="text/html; charset=unicode" http-equiv=Content-Type&gt;
+&lt;META name=GENERATOR content="MSHTML 11.00.9600.19204"&gt;&lt;/HEAD&gt;
+&lt;BODY&gt;&lt;/BODY&gt;&lt;/HTML&gt;
+</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{5F1FE8CE-B9DD-4395-8A33-40644EAC1EA9}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ErrorEmailMessage">
+      <DTS:VariableValue
+        DTS:DataType="8">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"&gt;
+&lt;HTML&gt;&lt;HEAD&gt;
+&lt;META content="text/html; charset=unicode" http-equiv=Content-Type&gt;
+&lt;META name=GENERATOR content="MSHTML 11.00.9600.19204"&gt;&lt;/HEAD&gt;
+&lt;BODY&gt;&lt;/BODY&gt;&lt;/HTML&gt;
+</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{219B24FE-805D-4781-96F2-67F81D1C28AE}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FillDate">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{949BF5EC-66F4-425F-9265-3FA48FE0AB65}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="intNewRxRowCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D86E9326-D939-4A20-944B-FBBD6A424BBC}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="intRowCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{4BC64DA9-A814-49DF-A9B7-92A653043610}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="NDC">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D92C9A89-D384-4B01-AE42-2140FE783CFC}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="OrderResults">
+      <DTS:VariableValue
+        DTS:DataSubType="ManagedSerializable"
+        DTS:DataType="13">
+        <SOAP-ENV:Envelope xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <SOAP-ENV:Body>
+            <xsd:anyType
+              id="ref-1"></xsd:anyType>
+          </SOAP-ENV:Body>
+        </SOAP-ENV:Envelope>
+      </DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{279825D3-9876-4293-BDB9-9204E1E02695}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="PatientId">
+      <DTS:VariableValue
+        DTS:DataType="8">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{DB4A6D9C-94CF-4B19-8AE9-38FCA436033C}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="PatientName">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{2DE59453-31A3-4652-8C2F-5D9264AADABC}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Payer">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{30BEFAB7-154F-434A-B8F0-4D6AF7D9DD3D}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="PrescriptionNumber">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{BA0D803F-B54E-4DFB-A4F9-C39151660BCD}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ProviderName">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{276ACF7F-B222-460A-B661-5684866DCFFD}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Quantity">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{EB3755A0-AA6C-44CB-9705-3C30A81C7960}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="RefillsRemaining">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A39C5109-ECA8-41A8-BBFA-0F34BB03A90E}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="GETDATE()"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="RunDate">
+      <DTS:VariableValue
+        DTS:DataType="7">5/24/2024 4:00:24 PM</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{7F1F2942-044C-48A7-9554-F1DAF3513A29}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="RIGHT(&quot;0&quot; + (DT_STR, 2, 1252) DATEPART(&quot;mm&quot; , @[User::RunDate]), 2) + &quot;/&quot; + RIGHT(&quot;0&quot; + (DT_STR, 2, 1252) DATEPART(&quot;dd&quot; , @[User::RunDate]), 2) + &quot;/&quot; + (DT_STR, 4, 1252) DATEPART(&quot;yy&quot; , @[User::RunDate])"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="RunDateFormatted">
+      <DTS:VariableValue
+        DTS:DataType="8">05/24/2024</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{BC20B8C1-7B1F-40D0-AB67-B339C8C9B290}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ServiceType">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{9011B9A3-5835-4C4B-B0C5-E40D8AEF852A}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ShipMethod">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B63CDC9F-337D-4C16-A234-76D1E06829B6}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="TicketId">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{8984BD07-4C18-409B-B842-763BC33DED5D}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="TrackingNumber">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{55E10C66-B3EC-400E-997D-700B1ED2A598}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Zip">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Get orders"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{9EDEBF66-5DA1-4DF0-B8CF-458FDD2536F3}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get orders"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{069A273A-0DA3-4DFF-98EA-ED76AF728443}"
+          SQLTask:SqlStatementSource="SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED&#xA; select [PatientId]&#xA;      ,[PatientName]&#xA;      ,[DeliveryDate]&#xA;      ,[FillDate]&#xA;      ,[AddressLine1]&#xA;      ,[AddressLine2]&#xA;      ,[Zip]&#xA;      ,[CityState]&#xA;      ,[DrugName]&#xA;      ,[Rx#]&#xA;      ,[Prescriber]&#xA;      ,[Payer]&#xA;      ,[NDC]&#xA;      ,[Quantity]&#xA;      ,[ServiceType]&#xA;      ,[ShipMethod]&#xA;      ,[TicketId]&#xA;      ,ShippingResponse.TrackingNumber&#xA;,PrescriptionDose.RefillQuantityAllowed + 1 - PrescriptionDose.CurrentRefillNumber AS RefillsRemaining&#xA; from  Amber.SublocadeEmailHistory&#xA;  INNER JOIN Delivery.Ticket on Ticket.Id = SublocadeEmailHistory.TicketId&#xA; -- LEFT JOIN Delivery.Ticket BackupTicket on BackupTicket.Id = Ticket.Parent_Id&#xA;  INNER JOIN Delivery.TicketShippingResponse on TicketShippingResponse.Ticket_Id = Ticket.Id&#xA;AND TicketShippingResponse.RecStatus = 1&#xA;JOIN Prescription.Prescription ON Prescription.PrescriptionNumber = SublocadeEmailHistory.Rx#&#xA;&#x9;AND Prescription.RecStatus = 1&#xA;&#x9;JOIN Prescription.PrescriptionDose ON PrescriptionDose.Prescription_Id = Prescription.Id&#xA;&#x9;AND PrescriptionDose.RecStatus = 1&#xA;  INNER JOIN Delivery.ShippingResponse ON ShippingResponse.Id = TicketShippingResponse.ShippingResponse_Id&#xA;   AND NOT EXISTS (&#xA;   SELECT 1&#xA;   FROM Amber.SublocadeEmailHistory&#xA;   WHERE (SublocadeEmailHistory.TicketId = Ticket.Id /*or SublocadeEmailHistory.TicketId = BackupTicket.Id*/)&#xA;   AND SublocadeEmailHistory.TrackingNumber IS NOT NULL&#xA;)"
+          SQLTask:ResultType="ResultSetType_Rowset" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::OrderResults" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Send email to Diamond"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{8DCED1B1-6F04-4531-964C-0E7E5079C739}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Send email to Diamond">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachADOEnumerator"
+        DTS:DTSID="{1DFCC592-F954-4ECC-9728-5896FE1B4A24}"
+        DTS:ObjectName="{1DFCC592-F954-4ECC-9728-5896FE1B4A24}">
+        <DTS:ObjectData>
+          <FEEADO
+            EnumType="EnumerateRowsInFirstTable"
+            VarName="User::OrderResults" />
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Send email to Diamond\Amber Email"
+          DTS:CreationName="PW.TaskFactory.AdvancedEmailTask"
+          DTS:Description="TF Advanced Email and SMS Task"
+          DTS:DTSID="{3FBCF78E-6BE8-4AA8-8D2B-C25285D7744A}"
+          DTS:ExecutableType="PW.TaskFactory.AdvancedEmailTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Amber Email"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <AdvancedEmailTask
+              Message="&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot;&gt;&#xA;&lt;HTML xmlns:o = &quot;urn:schemas-microsoft-com:office:office&quot;&gt;&lt;HEAD&gt;&#xA;&lt;META content=&quot;text/html; charset=unicode&quot; http-equiv=Content-Type&gt;&#xA;&lt;META name=GENERATOR content=&quot;MSHTML 11.00.10570.1001&quot;&gt;&lt;/HEAD&gt;&#xA;&lt;BODY&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;FONT face=Calibri&gt;&lt;IMG &#xA;border=0 hspace=0 alt=&quot;&quot; &#xA;src=&quot;https://www.amberpharmacy.com/CorrespondenceImages/AmberLogoJPG.jpg&quot; &#xA;align=baseline&gt;&lt;/FONT&gt;&lt;FONT face=Calibri&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;An order has been assigned a &#xA;tracking number. Please see below for further details:&lt;/P&gt;&lt;/FONT&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;FONT &#xA;face=Calibri&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;FONT face=Calibri&gt;Patient &#xA;Name:&lt;SPAN &#xA;style=&quot;mso-spacerun: yes&quot;&gt;&amp;nbsp;&lt;STRONG&gt;{{User::PatientName}}&lt;/STRONG&gt;&lt;/SPAN&gt;&lt;/FONT&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;FONT face=Calibri&gt;Shipping &#xA;Address Line 1:&lt;SPAN &#xA;style=&quot;mso-spacerun: yes&quot;&gt;&amp;nbsp;&lt;STRONG&gt;{{User::AddressLine1}}&lt;/STRONG&gt;&lt;/SPAN&gt;&lt;/FONT&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;FONT face=Calibri&gt;&lt;SPAN &#xA;style=&quot;mso-spacerun: yes&quot;&gt;Shipping Address Line 2:&lt;SPAN &#xA;style=&quot;mso-spacerun: yes&quot;&gt;&amp;nbsp;&lt;STRONG&gt;{{User::AddressLine2}}&lt;/STRONG&gt;&lt;/SPAN&gt;&lt;/SPAN&gt;&lt;/FONT&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;FONT face=Calibri&gt;&lt;SPAN &#xA;style=&quot;mso-spacerun: yes&quot;&gt;&lt;SPAN style=&quot;mso-spacerun: yes&quot;&gt;Shipping Address &#xA;City/State: &lt;STRONG&gt;{{User::CityState}}&lt;/STRONG&gt;&lt;/SPAN&gt;&lt;/SPAN&gt;&lt;/FONT&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;FONT face=Calibri&gt;&lt;SPAN &#xA;style=&quot;mso-spacerun: yes&quot;&gt;&lt;SPAN style=&quot;mso-spacerun: yes&quot;&gt;Shipping Address Zip: &#xA;&lt;STRONG&gt;{{User::Zip}}&lt;/STRONG&gt;&lt;/SPAN&gt;&lt;/SPAN&gt;&lt;/FONT&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;FONT face=Calibri&gt;&lt;SPAN &#xA;style=&quot;mso-spacerun: yes&quot;&gt;&lt;SPAN style=&quot;mso-spacerun: yes&quot;&gt;Drug: &#xA;&lt;STRONG&gt;{{User::Drug}}&lt;/STRONG&gt;&lt;/SPAN&gt;&lt;/SPAN&gt;&lt;/FONT&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;FONT face=Calibri&gt;&lt;SPAN &#xA;style=&quot;mso-spacerun: yes&quot;&gt;&lt;SPAN style=&quot;mso-spacerun: yes&quot;&gt;NDC: &#xA;&lt;STRONG&gt;{{User::NDC}}&lt;/STRONG&gt;&lt;/SPAN&gt;&lt;/SPAN&gt;&lt;/FONT&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;FONT face=Calibri&gt;Rx#: &#xA;&lt;STRONG&gt;{{User::PrescriptionNumber}}&lt;/STRONG&gt;&lt;/FONT&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;FONT face=Calibri&gt;Prescriber: &#xA;&lt;STRONG&gt;{{User::ProviderName}}&lt;/STRONG&gt;&lt;/FONT&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;FONT &#xA;face=Calibri&gt;Quantity:&lt;STRONG&gt; {{User::Quantity}}&lt;/STRONG&gt;&lt;/FONT&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;FONT face=Calibri&gt;Payer: &#xA;&lt;STRONG&gt;{{User::Payer}}&lt;/STRONG&gt;&lt;/FONT&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;FONT face=Calibri&gt;Ship &#xA;Method: &lt;STRONG&gt;{{User::ShipMethod}}&lt;/STRONG&gt;&lt;/FONT&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;FONT &#xA;face=Calibri&gt;ServiceType:&lt;STRONG&gt; {{User::ServiceType}}&lt;/STRONG&gt;&lt;/FONT&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;FONT &#xA;face=Calibri&gt;FillDate:&lt;STRONG&gt; {{User::FillDate}}&lt;/STRONG&gt;&lt;/FONT&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;FONT &#xA;face=Calibri&gt;DeliveryDate: &lt;STRONG&gt;{{User::DeliveryDate}}&lt;/STRONG&gt;&lt;/FONT&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;FONT &#xA;face=Calibri&gt;RefillsRemaining: &#xA;&lt;STRONG&gt;{{User::RefillsRemaining}}&lt;/STRONG&gt;&lt;/FONT&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;FONT &#xA;face=Calibri&gt;TrackingNumber: &#xA;&lt;STRONG&gt;{{User::TrackingNumber}}&lt;/STRONG&gt;&lt;/FONT&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;SPAN &#xA;style='FONT-SIZE: 10pt; FONT-FAMILY: &quot;Segoe UI&quot;,sans-serif; COLOR: black'&gt;&lt;o:p&gt;&lt;FONT &#xA;size=3 face=Calibri&gt;&amp;nbsp;&lt;/FONT&gt;&lt;/o:p&gt;&lt;/SPAN&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;SPAN &#xA;style='FONT-SIZE: 10pt; FONT-FAMILY: &quot;Segoe UI&quot;,sans-serif; COLOR: black'&gt;&lt;o:p&gt;&lt;FONT &#xA;size=3 face=Calibri&gt;Thank you,&lt;/FONT&gt;&lt;/o:p&gt;&lt;/SPAN&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;SPAN &#xA;style='FONT-SIZE: 10pt; FONT-FAMILY: &quot;Segoe UI&quot;,sans-serif; COLOR: black'&gt;&lt;o:p&gt;&lt;FONT &#xA;size=3 face=Calibri&gt;Amber Pharmacy&lt;/FONT&gt;&lt;/o:p&gt;&lt;/SPAN&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;SPAN &#xA;style='FONT-SIZE: 10pt; FONT-FAMILY: &quot;Segoe UI&quot;,sans-serif; COLOR: black'&gt;&lt;o:p&gt;&lt;FONT &#xA;size=3 face=Calibri&gt;888.370.1724&lt;/FONT&gt;&lt;/o:p&gt;&lt;/SPAN&gt;&lt;SPAN &#xA;style='FONT-SIZE: 10pt; FONT-FAMILY: &quot;Segoe UI&quot;,sans-serif; COLOR: black'&gt;&lt;o:p&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;A &#xA;href=&quot;http://www.amberpharmacy.com/&quot;&gt;&lt;FONT color=#0563c1 size=3 &#xA;face=Calibri&gt;www.amberpharmacy.com&lt;/FONT&gt;&lt;/A&gt;&lt;FONT size=3 face=Calibri&gt; &#xA;&lt;/FONT&gt;&lt;o:p&gt;&lt;/o:p&gt;&lt;/P&gt;&#xA;&lt;P class=MsoNoSpacing style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;/o:p&gt;&lt;/SPAN&gt;&amp;nbsp;&lt;/P&gt;&#xA;&lt;P&gt;&amp;nbsp;&lt;/P&gt;&lt;/BODY&gt;&lt;/HTML&gt;&#xA;"
+              MessageSourceType="Direct_Input"
+              MessageSource=""
+              MailConnectionId="{5FD1F395-C15C-4175-8FA6-738C72745499}"
+              MailConnection="EmailConnectionManager.mail.amberpharmacy.com"
+              SendToType="Email"
+              Subject="Diamond tracking notification"
+              SendTo="SpecialtyMed@diamondpharmacy.com"
+              SendFrom="AscellaHealth@amberpharmacy.com  "
+              SendToCC=""
+              SendToBCC="JgWilliams@amberpharmacy.com;JFaulkner@amberpharmacy.com"
+              Priority="Normal"
+              Attachments=""
+              UsePlainText="False"
+              PlainTextMessage=""
+              LogFilePath="" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Send email to Diamond\Note Creation"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{E1238F42-187E-4BEA-859F-41CA72AD6654}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Note Creation"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{069A273A-0DA3-4DFF-98EA-ED76AF728443}"
+              SQLTask:SqlStatementSource="DECLARE @maxId int;&#xA;&#xA;SELECT @maxId = MAX(ID) FROM [Encounter].[PatientEncounter] WHERE PATIENT_ID = @PatientId&#xA;&#xA;IF (@maxId IS NOT NULL)&#xA;&#xA;BEGIN&#xA;&#xA;INSERT INTO [Encounter].[PatientNote](PatientEncounter_Id, PatientNoteType_Id, EnteredByEmployee_Id, &#xA;    EnteredDate, [Subject], Body, TherigyChangeIndex, TherigyId, ReferenceTable, ReferenceId, CreatedBy, CreatedDate) &#xA;  VALUES(@maxId, 1, 1,  GETUTCDATE(), 'Sent Diamond Tracking Email',  N'Diamond Delivery Tracking Sent', 0,'','',0, 1,  GETUTCDATE());&#xA;&#xA;END&#xA;     &#xA;GO " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="@PatientId"
+                SQLTask:DtsVariableName="User::PatientId"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="12"
+                SQLTask:ParameterSize="10" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Send email to Diamond.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{DB696F64-0241-4250-AAC1-FC4D05D68FAB}"
+          DTS:From="Package\Send email to Diamond\Note Creation"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Send email to Diamond\Amber Email" />
+      </DTS:PrecedenceConstraints>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{99E4AC09-8092-41FF-8EEF-CDEF9FDFC3DC}"
+          DTS:ObjectName="{99E4AC09-8092-41FF-8EEF-CDEF9FDFC3DC}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::PatientId" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{27A21C86-7931-45F6-B796-B7324FF7A7BF}"
+          DTS:ObjectName="{27A21C86-7931-45F6-B796-B7324FF7A7BF}"
+          DTS:ValueIndex="1"
+          DTS:VariableName="User::PatientName" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{8C8BCCC7-8A09-4370-913D-ED390372A82F}"
+          DTS:ObjectName="{8C8BCCC7-8A09-4370-913D-ED390372A82F}"
+          DTS:ValueIndex="2"
+          DTS:VariableName="User::DeliveryDate" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{A6118FC2-099B-494A-BA16-E92CE3F8A3F3}"
+          DTS:ObjectName="{A6118FC2-099B-494A-BA16-E92CE3F8A3F3}"
+          DTS:ValueIndex="3"
+          DTS:VariableName="User::FillDate" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{FCB3F858-916A-453D-AF54-AAE1E506F919}"
+          DTS:ObjectName="{FCB3F858-916A-453D-AF54-AAE1E506F919}"
+          DTS:ValueIndex="4"
+          DTS:VariableName="User::AddressLine1" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{35BF98C0-96DE-4746-891C-FA03DD109F45}"
+          DTS:ObjectName="{35BF98C0-96DE-4746-891C-FA03DD109F45}"
+          DTS:ValueIndex="5"
+          DTS:VariableName="User::AddressLine2" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{ECA31EF8-FF4B-4B0E-865D-E2B88B39791F}"
+          DTS:ObjectName="{ECA31EF8-FF4B-4B0E-865D-E2B88B39791F}"
+          DTS:ValueIndex="6"
+          DTS:VariableName="User::Zip" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{F32226B3-8B4C-4B09-9AB5-C1BAD0234B73}"
+          DTS:ObjectName="{F32226B3-8B4C-4B09-9AB5-C1BAD0234B73}"
+          DTS:ValueIndex="7"
+          DTS:VariableName="User::CityState" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{C67A484A-9540-447A-B0B1-D45D1D563783}"
+          DTS:ObjectName="{C67A484A-9540-447A-B0B1-D45D1D563783}"
+          DTS:ValueIndex="8"
+          DTS:VariableName="User::Drug" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{8C6BAA2F-3452-48A4-8192-87ECEC20043A}"
+          DTS:ObjectName="{8C6BAA2F-3452-48A4-8192-87ECEC20043A}"
+          DTS:ValueIndex="9"
+          DTS:VariableName="User::PrescriptionNumber" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{808E0363-C77E-4582-9594-E911D3C58187}"
+          DTS:ObjectName="{808E0363-C77E-4582-9594-E911D3C58187}"
+          DTS:ValueIndex="10"
+          DTS:VariableName="User::ProviderName" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{40E658F5-5655-4439-90B9-FA91538D130E}"
+          DTS:ObjectName="{40E658F5-5655-4439-90B9-FA91538D130E}"
+          DTS:ValueIndex="11"
+          DTS:VariableName="User::Payer" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{2072D130-9EE3-47D4-830B-BD848A125AC0}"
+          DTS:ObjectName="{2072D130-9EE3-47D4-830B-BD848A125AC0}"
+          DTS:ValueIndex="12"
+          DTS:VariableName="User::NDC" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{EE4E3B95-67BB-449C-97BC-C98EF4E3261B}"
+          DTS:ObjectName="{EE4E3B95-67BB-449C-97BC-C98EF4E3261B}"
+          DTS:ValueIndex="13"
+          DTS:VariableName="User::Quantity" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{4CA335A8-3EBF-4FE4-8B66-6A019B15A3EA}"
+          DTS:ObjectName="{4CA335A8-3EBF-4FE4-8B66-6A019B15A3EA}"
+          DTS:ValueIndex="14"
+          DTS:VariableName="User::ServiceType" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{26F44C4E-804E-4FFB-85BF-A336B60CE1A5}"
+          DTS:ObjectName="{26F44C4E-804E-4FFB-85BF-A336B60CE1A5}"
+          DTS:ValueIndex="15"
+          DTS:VariableName="User::ShipMethod" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{94183DB8-2338-4677-AB6E-FD605E1930D2}"
+          DTS:ObjectName="{94183DB8-2338-4677-AB6E-FD605E1930D2}"
+          DTS:ValueIndex="17"
+          DTS:VariableName="User::TrackingNumber" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{B046C59C-308B-487B-B435-684E95221683}"
+          DTS:ObjectName="{B046C59C-308B-487B-B435-684E95221683}"
+          DTS:ValueIndex="18"
+          DTS:VariableName="User::RefillsRemaining" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update audit table with tracking numbers"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{C2343AB6-E6AE-4730-B8F4-E5552C8CAAAC}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update audit table with tracking numbers"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{069A273A-0DA3-4DFF-98EA-ED76AF728443}"
+          SQLTask:SqlStatementSource="update Amber.SublocadeEmailHistory&#xA;set SublocadeEmailHistory.TrackingNumber = ShippingResponse.TrackingNumber&#xA; from  Amber.SublocadeEmailHistory&#xA;  INNER JOIN Delivery.Ticket on Ticket.Id = SublocadeEmailHistory.TicketId&#xA;  INNER JOIN Delivery.TicketShippingResponse on TicketShippingResponse.Ticket_Id = Ticket.Id&#xA;  INNER JOIN Delivery.ShippingResponse ON ShippingResponse.Id = TicketShippingResponse.ShippingResponse_Id&#xA;   AND NOT EXISTS (&#xA;   SELECT 1&#xA;   FROM Amber.SublocadeEmailHistory&#xA;   WHERE SublocadeEmailHistory.TicketId = Ticket.Id &#xA;   AND SublocadeEmailHistory.TrackingNumber = ShippingResponse.TrackingNumber&#xA;)" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{77B880D5-42F7-4E8D-A7F1-A6D9759BB89E}"
+      DTS:From="Package\Get orders"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Update audit table with tracking numbers" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{ED94BE12-53D8-4D36-8059-8354394DA0A8}"
+      DTS:From="Package\Update audit table with tracking numbers"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Send email to Diamond" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="131,42"
+          Id="Package\Get orders"
+          TopLeft="159,15.2666666528914" />
+        <NodeLayout
+          Size="138,42"
+          Id="Package\Send email to Diamond\Amber Email"
+          TopLeft="206.87857528303,118.569872088619" />
+        <NodeLayout
+          Size="144,42"
+          Id="Package\Send email to Diamond\Note Creation"
+          TopLeft="197.166663831307,10.0210552106883" />
+        <EdgeLayout
+          Id="Package\Send email to Diamond.PrecedenceConstraints[Constraint]"
+          TopLeft="272.422619557169,51.6210552106883">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,66.9488168779307"
+              Start="0,0"
+              End="0,59.4488168779307">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,59.4488168779307" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="546,332"
+          Size="546,375"
+          Id="Package\Send email to Diamond"
+          TopLeft="158.869049674302,153.033851372895" />
+        <NodeLayout
+          Size="274,42"
+          Id="Package\Update audit table with tracking numbers"
+          TopLeft="336.035716374082,54.900518046449" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="290,36.2666666528914">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="46.035716374082,39.6338513935576"
+              Start="0,0"
+              End="38.535716374082,39.6338513935576">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="19.017858187041,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="19.017858187041,0"
+                    Point2="23.017858187041,0"
+                    Point3="23.017858187041,4" />
+                  <mssgle:LineSegment
+                    End="23.017858187041,35.6338513935576" />
+                  <mssgle:CubicBezierSegment
+                    Point1="23.017858187041,35.6338513935576"
+                    Point2="23.017858187041,39.6338513935576"
+                    Point3="27.017858187041,39.6338513935576" />
+                  <mssgle:LineSegment
+                    End="38.535716374082,39.6338513935576" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="472.835716374082,96.500518046449">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-41.1666666997804,56.5333333264457"
+              Start="0,0"
+              End="-41.1666666997804,49.0333333264457">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.2666666632229" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,24.2666666632229"
+                    Point2="0,28.2666666632229"
+                    Point3="-4,28.2666666632229" />
+                  <mssgle:LineSegment
+                    End="-37.1666666997804,28.2666666632229" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-37.1666666997804,28.2666666632229"
+                    Point2="-41.1666666997804,28.2666666632229"
+                    Point3="-41.1666666997804,32.2666666632229" />
+                  <mssgle:LineSegment
+                    End="-41.1666666997804,49.0333333264457" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

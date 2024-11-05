@@ -1,0 +1,129 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/12/2023 10:50:15 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="OMA-IT21"
+  DTS:CreatorName="AMBERPHARMACY\Jgwilliams"
+  DTS:DTSID="{669B0B8A-7160-4F2B-A4FF-13E065F9A9A6}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.170"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="TDReferrals"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="0"
+  DTS:VersionBuild="41"
+  DTS:VersionGUID="{C784CEF6-934F-4ED5-9523-66A8D98751AE}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[EmailConnectionManager.mail.amberpharmacy.com]"
+      DTS:CreationName="EmailConnectionManager"
+      DTS:DTSID="{44245F27-E43D-4C37-9724-2ADEA6A6ACEC}"
+      DTS:ObjectName="EmailConnectionManager.mail.amberpharmacy.com">
+      <DTS:ObjectData>
+        <EmailConnectionManager
+          ConnectionString="OutgoingRequiresAuth=False;SMTPConnectionSetting=;SMTPConnectionUsername=;ConnectionRequiresSPA=False;MailAccountType=3;ServerAddress=mail.amberpharmacy.com;UserName=;ServerPort=25;RequiresSSLConnection=False;EncryptedConnectionType=0;ServerTimeout=60;RootFolder=;ReuseConnection=False;"
+          ConnectByProxy="False" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D712A667-C9D7-42A6-881C-F6D0CE02A56F}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FileFormat">
+      <DTS:VariableValue
+        DTS:DataType="8">.xlsx</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{15F70ED7-0C5F-45B8-96E8-B8E0F5B3F799}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FilePath">
+      <DTS:VariableValue
+        DTS:DataType="8">\\ambromafs03\shares\Reports\HCV Fax\TDReferrals_</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{DA256A67-3EC1-4985-9656-E52B17FD05DA}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="(SUBSTRING( @[User::RunDateFormatted] ,1,2) + SUBSTRING( @[User::RunDateFormatted] ,4,2) + SUBSTRING( @[User::RunDateFormatted] ,7,4))"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="RunDate">
+      <DTS:VariableValue
+        DTS:DataType="8">02252024</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{93B19F17-E166-44CB-B9E6-440937A27049}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="RIGHT(&quot;0&quot; + (DT_STR, 2, 1252) DATEPART(&quot;mm&quot; , getdate()), 2) + &quot;/&quot; + RIGHT(&quot;0&quot; + (DT_STR, 2, 1252) DATEPART(&quot;dd&quot; , getdate()), 2) + &quot;/&quot; + (DT_STR, 4, 1252) DATEPART(&quot;yy&quot; , getdate())"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="RunDateFormatted">
+      <DTS:VariableValue
+        DTS:DataType="8">02/25/2024</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\TF Advanced Email and SMS Task 1"
+      DTS:CreationName="PW.TaskFactory.AdvancedEmailTask"
+      DTS:Description="TF Advanced Email and SMS Task"
+      DTS:DTSID="{9A086D5F-173E-4768-9031-4F73D83297E2}"
+      DTS:ExecutableType="PW.TaskFactory.AdvancedEmailTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="TF Advanced Email and SMS Task 1"
+      DTS:TaskContact="Advanced Email and SMS Task; Task Factory © 2021 SolarWinds Worldwide, LLC; http://www.solarwinds.com;support@solarwinds.com"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:PropertyExpression
+        DTS:Name="Attachments">@[User::FilePath] +  @[User::RunDate] +  @[User::FileFormat]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <AdvancedEmailTask
+          Message="&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot;&gt;&#xA;&lt;HTML&gt;&lt;HEAD&gt;&#xA;&lt;META content=&quot;text/html; charset=unicode&quot; http-equiv=Content-Type&gt;&#xA;&lt;META name=GENERATOR content=&quot;MSHTML 11.00.10570.1001&quot;&gt;&lt;/HEAD&gt;&#xA;&lt;BODY&gt;&#xA;&lt;P&gt;&amp;nbsp;&lt;/P&gt;&lt;/BODY&gt;&lt;/HTML&gt;&#xA;"
+          MessageSourceType="Direct_Input"
+          MessageSource=""
+          MailConnectionId="{44245F27-E43D-4C37-9724-2ADEA6A6ACEC}"
+          MailConnection="EmailConnectionManager.mail.amberpharmacy.com"
+          SendToType="Email"
+          Subject="TD Referrals"
+          SendTo="GPicardo@amberpharmacy.com;CHoltgrave@amberpharmacy.com"
+          SendFrom="info@amberpharmacy.com"
+          SendToCC=""
+          SendToBCC="JgWilliams@amberpharmacy.com"
+          Priority="Normal"
+          Attachments="\\ambromafs03\shares\Reports\HCV Fax\TDReferrals_02252024.xlsx"
+          UsePlainText="False"
+          PlainTextMessage=""
+          LogFilePath="" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="259,42"
+          Id="Package\TF Advanced Email and SMS Task 1"
+          TopLeft="239,177" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

@@ -1,0 +1,1587 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="9/1/2023 3:03:53 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="OMA-IT21"
+  DTS:CreatorName="AMBERPHARMACY\Jgwilliams"
+  DTS:DTSID="{C89B93A0-EEA8-4356-89AB-9A14EA7DC440}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.170"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Transplant_SendGrid"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="0"
+  DTS:VersionBuild="44"
+  DTS:VersionGUID="{857841E4-2341-43C5-A032-DBB52DE8BDB2}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ambromactsql.CareTend_Amber_Prod]"
+      DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      DTS:DTSID="{AEE99494-1920-4670-AE90-FEE8F614F3E7}"
+      DTS:ObjectName="ambromactsql.CareTend_Amber_Prod">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=ambromactsql;Initial Catalog=CareTend_Amber_Prod;Integrated Security=True;Application Name=SSIS-Azure Statements Upload Task-{AEE99494-1920-4670-AE90-FEE8F614F3E7}ambromactsql.CareTend_Amber_Prod;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ambromactsql.CareTend_Amber_Prod 1]"
+      DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      DTS:DTSID="{F8B21379-29D4-4FA2-8F9F-B1D87F5CC1AF}"
+      DTS:ObjectName="ambromactsql.CareTend_Amber_Prod 1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=ambromactsql;Initial Catalog=CareTend_Amber_Prod;Integrated Security=True;Application Name=SSIS-Azure Statements Upload Task-{F8B21379-29D4-4FA2-8F9F-B1D87F5CC1AF}ambromactsql.CareTend_Amber_Prod;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Prod]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{BD4198B6-589C-4083-8164-A4D1CCB1E5A1}"
+      DTS:ObjectName="Prod">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=ambromactsql;Initial Catalog=CareTend_Amber_Prod;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A6AE7946-17BF-42E1-9F16-59090D93D02B}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="EmailAddress">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{9316B318-4488-4BFE-AD45-03EFE7CED015}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="intRowCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{583030DB-58D0-4273-8FBC-8E3B32718728}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="PatientResult">
+      <DTS:VariableValue
+        DTS:DataSubType="ManagedSerializable"
+        DTS:DataType="13">
+        <SOAP-ENV:Envelope xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <SOAP-ENV:Body>
+            <xsd:anyType
+              id="ref-1"></xsd:anyType>
+          </SOAP-ENV:Body>
+        </SOAP-ENV:Envelope>
+      </DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{635F7CDD-DC6C-4370-A3D4-6DEB984A983E}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="TemplateId">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Get patients to email"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{C54492CE-5C95-4FB0-B71F-750D32FCBB3E}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get patients to email"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{AEE99494-1920-4670-AE90-FEE8F614F3E7}"
+          SQLTask:SqlStatementSource="SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;&#xA;SELECT DISTINCT &#xA;&#x9;Patient.Id as PatientId,&#xA;&#x9;Person.FirstName + ' ' + Person.LastName as PatientName,&#xA;&#x9;EmailAddress.Address as EmailAddress,&#xA;    '7602f3f6-cd3b-4f4d-93cf-0675fa1f0160' as TemplateId&#xA;FROM Prescription.PatientOrder po&#xA;   INNER JOIN Prescription.Prescription on Prescription.PatientOrder_Id = po.Id&#xA;  AND Prescription.RecStatus = 1&#xA;  INNER JOIN Workflow.WorkflowHistory on WorkflowHistory.Reference_Id = po.Id&#xA;  AND WorkflowHistory.RecStatus = 1 &#xA;  INNER JOIN Patient.Patient on Patient.Id = po.Patient_Id&#xA;  INNER JOIN Common.Person Person on Patient.Id = Person.Id&#xA;  LEFT OUTER JOIN Lookups.PreferredMethodOfContact&#x9;ON Patient.PreferredMethodOfContact_Id = PreferredMethodOfContact.Id&#xA;     AND PreferredMethodOfContact.IsActive = 1&#x9;&#xA;  INNER JOIN Common.EmailAddress on EmailAddress.Party_Id = Patient.Id&#xA;  LEFT JOIN (&#xA;&#x9;SELECT DISTINCT [PatientStatusHistory].[Patient_Id]&#xA;&#x9;&#x9;,[PatientStatusHistory].[Status_Id]&#xA;&#x9;&#x9;,ROW_NUMBER() OVER (&#xA;&#x9;&#x9;&#x9;PARTITION BY [Patient_Id] ORDER BY [EffectiveDate] DESC&#xA;&#x9;&#x9;&#x9;) AS [Rank]&#xA;&#x9;FROM [Patient].[PatientStatusHistory]&#xA;&#x9;WHERE [PatientStatusHistory].[RecStatus] = 1&#xA;&#x9;) [PatientStatusHistory] ON [Patient].[Id] = [PatientStatusHistory].[Patient_Id]&#xA;&#x9;AND [PatientStatusHistory].[Rank] = 1&#xA; &#xA;WHERE &#xA;  po.RecStatus = 1&#xA;  AND [PatientStatusHistory].[Status_Id] != 2&#xA;  AND  NOT EXISTS (SELECT 1 FROM Amber.TransplantWelcomeEmails where TransplantWelcomeEmails.PatientId = Patient.Id)&#xA;  and WorkflowHistory.FillNumber = 1&#xA;  AND DATEADD(mi, DATEDIFF(mi, GETUTCDATE(), GETDATE()), WorkflowHistory.TransitionDate)  BETWEEN dateadd(dd,-3,getdate()) and getdate()&#xA;  AND Patient.Team_Id = 500013&#xA;  and (PreferredMethodOfContact_Id IS NULL OR PreferredMethodOfContact_Id != 8)&#xA;  and EmailAddress.Address like '%@%'&#xA;  AND NOT EXISTS (SELECT 1 FROM Prescription.PrescriptionFill&#xA;INNER JOIN Prescription.Prescription on PrescriptionFill.Prescription_Id = Prescription.Id&#xA;where CAST(ActualCompoundingDate AS DATE) &lt; CAST(WorkflowHistory.TransitionDate AS DATE) and Prescription.Patient_Id = Patient.Id)&#xA;&#xA;UNION&#xA;&#xA;SELECT DISTINCT &#xA;&#x9;Patient.Id as PatientId,&#xA;&#x9;Person.FirstName + ' ' + Person.LastName as PatientName,&#xA;&#x9;EmailAddress.Address as EmailAddress,&#xA;    '1c3f7312-0661-4756-b23e-6325af06ed06' as TemplateId&#xA;FROM Prescription.PatientOrder po&#xA;   INNER JOIN Prescription.Prescription on Prescription.PatientOrder_Id = po.Id&#xA;  AND Prescription.RecStatus = 1&#xA;  INNER JOIN Workflow.WorkflowHistory on WorkflowHistory.Reference_Id = po.Id&#xA;  AND WorkflowHistory.RecStatus = 1 &#xA;  INNER JOIN Patient.Patient on Patient.Id = po.Patient_Id&#xA;  INNER JOIN Common.Person Person on Patient.Id = Person.Id&#xA;  LEFT OUTER JOIN Lookups.PreferredMethodOfContact&#x9;ON Patient.PreferredMethodOfContact_Id = PreferredMethodOfContact.Id&#xA;     AND PreferredMethodOfContact.IsActive = 1&#x9;&#xA;  INNER JOIN Common.EmailAddress on EmailAddress.Party_Id = Patient.Id&#xA;   LEFT JOIN (&#xA;&#x9;SELECT DISTINCT [PatientStatusHistory].[Patient_Id]&#xA;&#x9;&#x9;,[PatientStatusHistory].[Status_Id]&#xA;&#x9;&#x9;,ROW_NUMBER() OVER (&#xA;&#x9;&#x9;&#x9;PARTITION BY [Patient_Id] ORDER BY [EffectiveDate] DESC&#xA;&#x9;&#x9;&#x9;) AS [Rank]&#xA;&#x9;FROM [Patient].[PatientStatusHistory]&#xA;&#x9;WHERE [PatientStatusHistory].[RecStatus] = 1&#xA;&#x9;) [PatientStatusHistory] ON [Patient].[Id] = [PatientStatusHistory].[Patient_Id]&#xA;&#x9;AND [PatientStatusHistory].[Rank] = 1&#xA; &#xA;WHERE &#xA;  po.RecStatus = 1&#xA;  AND [PatientStatusHistory].[Status_Id] != 2&#xA;  AND  NOT EXISTS (SELECT 1 FROM Amber.TransplantWelcomeEmails where TransplantWelcomeEmails.PatientId = Patient.Id AND EmailNumber = 2)&#xA;  AND Patient.Team_Id = 500013&#xA;  and (PreferredMethodOfContact_Id IS NULL OR PreferredMethodOfContact_Id != 8)&#xA;  and EmailAddress.Address like '%@%'&#xA;  AND  EXISTS (SELECT 1 FROM Amber.TransplantWelcomeEmails where TransplantWelcomeEmails.PatientId = Patient.Id AND EmailNumber = 1&#xA;  And CAST(TransplantWelcomeEmails.DateInserted AS DATE) &lt;= CAST(DATEADD(DD,-30,GETDATE()) AS DATE))&#xA;&#xA;  UNION&#xA;&#xA;SELECT DISTINCT &#xA;&#x9;Patient.Id as PatientId,&#xA;&#x9;Person.FirstName + ' ' + Person.LastName as PatientName,&#xA;&#x9;EmailAddress.Address as EmailAddress,&#xA;    'aa97e39f-aecf-46d1-a558-4f94621a1744' as TemplateId&#xA;FROM Prescription.PatientOrder po&#xA;   INNER JOIN Prescription.Prescription on Prescription.PatientOrder_Id = po.Id&#xA;  AND Prescription.RecStatus = 1&#xA;  INNER JOIN Workflow.WorkflowHistory on WorkflowHistory.Reference_Id = po.Id&#xA;  AND WorkflowHistory.RecStatus = 1 &#xA;  INNER JOIN Patient.Patient on Patient.Id = po.Patient_Id&#xA;  INNER JOIN Common.Person Person on Patient.Id = Person.Id&#xA;  LEFT OUTER JOIN Lookups.PreferredMethodOfContact&#x9;ON Patient.PreferredMethodOfContact_Id = PreferredMethodOfContact.Id&#xA;     AND PreferredMethodOfContact.IsActive = 1&#x9;&#xA;  INNER JOIN Common.EmailAddress on EmailAddress.Party_Id = Patient.Id&#xA;  INNER JOIN Amber.TransplantWelcomeEmails ON TransplantWelcomeEmails.PatientId = Patient.Id and EmailNumber = 2&#xA;   LEFT JOIN (&#xA;&#x9;SELECT DISTINCT [PatientStatusHistory].[Patient_Id]&#xA;&#x9;&#x9;,[PatientStatusHistory].[Status_Id]&#xA;&#x9;&#x9;,ROW_NUMBER() OVER (&#xA;&#x9;&#x9;&#x9;PARTITION BY [Patient_Id] ORDER BY [EffectiveDate] DESC&#xA;&#x9;&#x9;&#x9;) AS [Rank]&#xA;&#x9;FROM [Patient].[PatientStatusHistory]&#xA;&#x9;WHERE [PatientStatusHistory].[RecStatus] = 1&#xA;&#x9;) [PatientStatusHistory] ON [Patient].[Id] = [PatientStatusHistory].[Patient_Id]&#xA;&#x9;AND [PatientStatusHistory].[Rank] = 1&#xA; &#xA;WHERE &#xA;  po.RecStatus = 1&#xA;  AND [PatientStatusHistory].[Status_Id] != 2&#xA;  AND  NOT EXISTS (SELECT 1 FROM Amber.TransplantWelcomeEmails where TransplantWelcomeEmails.PatientId = Patient.Id AND EmailNumber = 3)&#xA;  AND Patient.Team_Id = 500013&#xA;  and (PreferredMethodOfContact_Id IS NULL OR PreferredMethodOfContact_Id != 8)&#xA;  and EmailAddress.Address like '%@%'&#xA;  AND CAST(TransplantWelcomeEmails.DateInserted AS DATE) &lt;= CAST(DATEADD(DD,-30,GETDATE()) AS DATE)&#xA;&#xA;  UNION&#xA;&#xA;  SELECT DISTINCT &#xA;&#x9;Patient.Id as PatientId,&#xA;&#x9;Person.FirstName + ' ' + Person.LastName as PatientName,&#xA;&#x9;EmailAddress.Address as EmailAddress,&#xA;    '4f09c2db-51a8-4ac2-beb9-9a69ecc8566e' as TemplateId&#xA;FROM Prescription.PatientOrder po&#xA;   INNER JOIN Prescription.Prescription on Prescription.PatientOrder_Id = po.Id&#xA;  AND Prescription.RecStatus = 1&#xA;  INNER JOIN Workflow.WorkflowHistory on WorkflowHistory.Reference_Id = po.Id&#xA;  AND WorkflowHistory.RecStatus = 1 &#xA;  INNER JOIN Patient.Patient on Patient.Id = po.Patient_Id&#xA;  INNER JOIN Common.Person Person on Patient.Id = Person.Id&#xA;  LEFT OUTER JOIN Lookups.PreferredMethodOfContact&#x9;ON Patient.PreferredMethodOfContact_Id = PreferredMethodOfContact.Id&#xA;     AND PreferredMethodOfContact.IsActive = 1&#x9;&#xA;  INNER JOIN Common.EmailAddress on EmailAddress.Party_Id = Patient.Id&#xA;  INNER JOIN Amber.TransplantWelcomeEmails ON TransplantWelcomeEmails.PatientId = Patient.Id and EmailNumber = 3&#xA;   LEFT JOIN (&#xA;&#x9;SELECT DISTINCT [PatientStatusHistory].[Patient_Id]&#xA;&#x9;&#x9;,[PatientStatusHistory].[Status_Id]&#xA;&#x9;&#x9;,ROW_NUMBER() OVER (&#xA;&#x9;&#x9;&#x9;PARTITION BY [Patient_Id] ORDER BY [EffectiveDate] DESC&#xA;&#x9;&#x9;&#x9;) AS [Rank]&#xA;&#x9;FROM [Patient].[PatientStatusHistory]&#xA;&#x9;WHERE [PatientStatusHistory].[RecStatus] = 1&#xA;&#x9;) [PatientStatusHistory] ON [Patient].[Id] = [PatientStatusHistory].[Patient_Id]&#xA;&#x9;AND [PatientStatusHistory].[Rank] = 1&#xA; &#xA;WHERE &#xA;  po.RecStatus = 1&#xA;  AND [PatientStatusHistory].[Status_Id] != 2&#xA;  AND  NOT EXISTS (SELECT 1 FROM Amber.TransplantWelcomeEmails where TransplantWelcomeEmails.PatientId = Patient.Id AND EmailNumber = 4)&#xA;  AND Patient.Team_Id = 500013&#xA;  and (PreferredMethodOfContact_Id IS NULL OR PreferredMethodOfContact_Id != 8)&#xA;  and EmailAddress.Address like '%@%'&#xA;  AND CAST(TransplantWelcomeEmails.DateInserted AS DATE) &lt;= CAST(DATEADD(DD,-30,GETDATE()) AS DATE)&#xA;&#xA;  UNION&#xA;&#xA;  SELECT DISTINCT &#xA;&#x9;Patient.Id as PatientId,&#xA;&#x9;Person.FirstName + ' ' + Person.LastName as PatientName,&#xA;&#x9;EmailAddress.Address as EmailAddress,&#xA;    'bf06bb4c-03ed-482b-a754-c67825574101' as TemplateId&#xA;FROM Prescription.PatientOrder po&#xA;   INNER JOIN Prescription.Prescription on Prescription.PatientOrder_Id = po.Id&#xA;  AND Prescription.RecStatus = 1&#xA;  INNER JOIN Workflow.WorkflowHistory on WorkflowHistory.Reference_Id = po.Id&#xA;  AND WorkflowHistory.RecStatus = 1 &#xA;  INNER JOIN Patient.Patient on Patient.Id = po.Patient_Id&#xA;  INNER JOIN Common.Person Person on Patient.Id = Person.Id&#xA;  LEFT OUTER JOIN Lookups.PreferredMethodOfContact&#x9;ON Patient.PreferredMethodOfContact_Id = PreferredMethodOfContact.Id&#xA;     AND PreferredMethodOfContact.IsActive = 1&#x9;&#xA;  INNER JOIN Common.EmailAddress on EmailAddress.Party_Id = Patient.Id&#xA;  INNER JOIN Amber.TransplantWelcomeEmails ON TransplantWelcomeEmails.PatientId = Patient.Id and EmailNumber = 4&#xA;   LEFT JOIN (&#xA;&#x9;SELECT DISTINCT [PatientStatusHistory].[Patient_Id]&#xA;&#x9;&#x9;,[PatientStatusHistory].[Status_Id]&#xA;&#x9;&#x9;,ROW_NUMBER() OVER (&#xA;&#x9;&#x9;&#x9;PARTITION BY [Patient_Id] ORDER BY [EffectiveDate] DESC&#xA;&#x9;&#x9;&#x9;) AS [Rank]&#xA;&#x9;FROM [Patient].[PatientStatusHistory]&#xA;&#x9;WHERE [PatientStatusHistory].[RecStatus] = 1&#xA;&#x9;) [PatientStatusHistory] ON [Patient].[Id] = [PatientStatusHistory].[Patient_Id]&#xA;&#x9;AND [PatientStatusHistory].[Rank] = 1&#xA; &#xA;WHERE &#xA;  po.RecStatus = 1&#xA;  AND [PatientStatusHistory].[Status_Id] != 2&#xA;  AND  NOT EXISTS (SELECT 1 FROM Amber.TransplantWelcomeEmails where TransplantWelcomeEmails.PatientId = Patient.Id AND EmailNumber = 5)&#xA;  AND Patient.Team_Id = 500013&#xA;  and (PreferredMethodOfContact_Id IS NULL OR PreferredMethodOfContact_Id != 8)&#xA;  and EmailAddress.Address like '%@%'&#xA;  AND CAST(TransplantWelcomeEmails.DateInserted AS DATE) &lt;= CAST(DATEADD(DD,-30,GETDATE()) AS DATE)&#xA;&#xA;   UNION&#xA;&#xA;  SELECT DISTINCT &#xA;&#x9;Patient.Id as PatientId,&#xA;&#x9;Person.FirstName + ' ' + Person.LastName as PatientName,&#xA;&#x9;EmailAddress.Address as EmailAddress,&#xA;    '668bef06-d68b-4c2b-ab15-681490254ad5' as TemplateId&#xA;FROM Prescription.PatientOrder po&#xA;   INNER JOIN Prescription.Prescription on Prescription.PatientOrder_Id = po.Id&#xA;  AND Prescription.RecStatus = 1&#xA;  INNER JOIN Workflow.WorkflowHistory on WorkflowHistory.Reference_Id = po.Id&#xA;  AND WorkflowHistory.RecStatus = 1 &#xA;  INNER JOIN Patient.Patient on Patient.Id = po.Patient_Id&#xA;  INNER JOIN Common.Person Person on Patient.Id = Person.Id&#xA;  LEFT OUTER JOIN Lookups.PreferredMethodOfContact&#x9;ON Patient.PreferredMethodOfContact_Id = PreferredMethodOfContact.Id&#xA;     AND PreferredMethodOfContact.IsActive = 1&#x9;&#xA;  INNER JOIN Common.EmailAddress on EmailAddress.Party_Id = Patient.Id&#xA;  INNER JOIN Amber.TransplantWelcomeEmails ON TransplantWelcomeEmails.PatientId = Patient.Id and EmailNumber = 5&#xA;   LEFT JOIN (&#xA;&#x9;SELECT DISTINCT [PatientStatusHistory].[Patient_Id]&#xA;&#x9;&#x9;,[PatientStatusHistory].[Status_Id]&#xA;&#x9;&#x9;,ROW_NUMBER() OVER (&#xA;&#x9;&#x9;&#x9;PARTITION BY [Patient_Id] ORDER BY [EffectiveDate] DESC&#xA;&#x9;&#x9;&#x9;) AS [Rank]&#xA;&#x9;FROM [Patient].[PatientStatusHistory]&#xA;&#x9;WHERE [PatientStatusHistory].[RecStatus] = 1&#xA;&#x9;) [PatientStatusHistory] ON [Patient].[Id] = [PatientStatusHistory].[Patient_Id]&#xA;&#x9;AND [PatientStatusHistory].[Rank] = 1&#xA; &#xA;WHERE &#xA;  po.RecStatus = 1&#xA;  AND [PatientStatusHistory].[Status_Id] != 2&#xA;  AND  NOT EXISTS (SELECT 1 FROM Amber.TransplantWelcomeEmails where TransplantWelcomeEmails.PatientId = Patient.Id AND EmailNumber = 6)&#xA;  AND Patient.Team_Id = 500013&#xA;  and (PreferredMethodOfContact_Id IS NULL OR PreferredMethodOfContact_Id != 8)&#xA;  and EmailAddress.Address like '%@%'&#xA;  AND CAST(TransplantWelcomeEmails.DateInserted AS DATE) &lt;= CAST(DATEADD(DD,-30,GETDATE()) AS DATE)"
+          SQLTask:ResultType="ResultSetType_Rowset" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::PatientResult" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load history table"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{6E9610BD-3FF8-44FE-8339-DB290685EEE1}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load history table"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load history table\ADO NET Source"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Consumes data from SQL Server, OLE DB, ODBC, or Oracle, using the corresponding .NET Framework data provider. Use a Transact-SQL statement to define the result set. For example, extract data from SQL Server with the .NET Framework data provider for SQL Server.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="Consumes data from SQL Server, OLE DB, ODBC, or Oracle, using the corresponding .NET Framework data provider. Use a Transact-SQL statement to define the result set. For example, extract data from SQL Server with the .NET Framework data provider for SQL Server."
+              name="ADO NET Source"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement used by the component to extract data."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
+SELECT DISTINCT 
+	Patient.Id as PatientId,
+	Person.FirstName + ' ' + Person.LastName as PatientName,
+	EmailAddress.Address as EmailAddress,
+                   1 as EmailNumber
+FROM Prescription.PatientOrder po
+   INNER JOIN Prescription.Prescription on Prescription.PatientOrder_Id = po.Id
+  AND Prescription.RecStatus = 1
+  INNER JOIN Workflow.WorkflowHistory on WorkflowHistory.Reference_Id = po.Id
+  AND WorkflowHistory.RecStatus = 1 
+  INNER JOIN Patient.Patient on Patient.Id = po.Patient_Id
+  INNER JOIN Common.Person Person on Patient.Id = Person.Id
+  LEFT OUTER JOIN Lookups.PreferredMethodOfContact	ON Patient.PreferredMethodOfContact_Id = PreferredMethodOfContact.Id
+     AND PreferredMethodOfContact.IsActive = 1	
+  INNER JOIN Common.EmailAddress on EmailAddress.Party_Id = Patient.Id
+  LEFT JOIN (
+	SELECT DISTINCT [PatientStatusHistory].[Patient_Id]
+		,[PatientStatusHistory].[Status_Id]
+		,ROW_NUMBER() OVER (
+			PARTITION BY [Patient_Id] ORDER BY [EffectiveDate] DESC
+			) AS [Rank]
+	FROM [Patient].[PatientStatusHistory]
+	WHERE [PatientStatusHistory].[RecStatus] = 1
+	) [PatientStatusHistory] ON [Patient].[Id] = [PatientStatusHistory].[Patient_Id]
+	AND [PatientStatusHistory].[Rank] = 1
+ 
+WHERE 
+  po.RecStatus = 1
+  AND [PatientStatusHistory].[Status_Id] != 2
+  AND  NOT EXISTS (SELECT 1 FROM Amber.TransplantWelcomeEmails where TransplantWelcomeEmails.PatientId = Patient.Id)
+  and WorkflowHistory.FillNumber = 1
+  AND DATEADD(mi, DATEDIFF(mi, GETUTCDATE(), GETDATE()), WorkflowHistory.TransitionDate)  BETWEEN dateadd(dd,-3,getdate()) and getdate()
+  AND Patient.Team_Id = 500013
+  and (PreferredMethodOfContact_Id IS NULL OR PreferredMethodOfContact_Id != 8)
+  and EmailAddress.Address like '%@%'
+  AND NOT EXISTS (SELECT 1 FROM Prescription.PrescriptionFill
+INNER JOIN Prescription.Prescription on PrescriptionFill.Prescription_Id = Prescription.Id
+where CAST(ActualCompoundingDate AS DATE) &lt; CAST(WorkflowHistory.TransitionDate AS DATE) and Prescription.Patient_Id = Patient.Id)
+
+UNION
+
+SELECT DISTINCT 
+	Patient.Id as PatientId,
+	Person.FirstName + ' ' + Person.LastName as PatientName,
+	EmailAddress.Address as EmailAddress,
+    2 as EmailNumber
+FROM Prescription.PatientOrder po
+   INNER JOIN Prescription.Prescription on Prescription.PatientOrder_Id = po.Id
+  AND Prescription.RecStatus = 1
+  INNER JOIN Workflow.WorkflowHistory on WorkflowHistory.Reference_Id = po.Id
+  AND WorkflowHistory.RecStatus = 1 
+  INNER JOIN Patient.Patient on Patient.Id = po.Patient_Id
+  INNER JOIN Common.Person Person on Patient.Id = Person.Id
+  LEFT OUTER JOIN Lookups.PreferredMethodOfContact	ON Patient.PreferredMethodOfContact_Id = PreferredMethodOfContact.Id
+     AND PreferredMethodOfContact.IsActive = 1	
+  INNER JOIN Common.EmailAddress on EmailAddress.Party_Id = Patient.Id
+   LEFT JOIN (
+	SELECT DISTINCT [PatientStatusHistory].[Patient_Id]
+		,[PatientStatusHistory].[Status_Id]
+		,ROW_NUMBER() OVER (
+			PARTITION BY [Patient_Id] ORDER BY [EffectiveDate] DESC
+			) AS [Rank]
+	FROM [Patient].[PatientStatusHistory]
+	WHERE [PatientStatusHistory].[RecStatus] = 1
+	) [PatientStatusHistory] ON [Patient].[Id] = [PatientStatusHistory].[Patient_Id]
+	AND [PatientStatusHistory].[Rank] = 1
+ 
+WHERE 
+  po.RecStatus = 1
+  AND [PatientStatusHistory].[Status_Id] != 2
+  AND  NOT EXISTS (SELECT 1 FROM Amber.TransplantWelcomeEmails where TransplantWelcomeEmails.PatientId = Patient.Id AND EmailNumber = 2)
+  AND Patient.Team_Id = 500013
+  and (PreferredMethodOfContact_Id IS NULL OR PreferredMethodOfContact_Id != 8)
+  and EmailAddress.Address like '%@%'
+  AND  EXISTS (SELECT 1 FROM Amber.TransplantWelcomeEmails where TransplantWelcomeEmails.PatientId = Patient.Id AND EmailNumber = 1
+  And CAST(TransplantWelcomeEmails.DateInserted AS DATE) &lt;= CAST(DATEADD(DD,-30,GETDATE()) AS DATE))
+
+  UNION
+
+SELECT DISTINCT 
+	Patient.Id as PatientId,
+	Person.FirstName + ' ' + Person.LastName as PatientName,
+	EmailAddress.Address as EmailAddress,
+    3 as EmailNumber
+FROM Prescription.PatientOrder po
+   INNER JOIN Prescription.Prescription on Prescription.PatientOrder_Id = po.Id
+  AND Prescription.RecStatus = 1
+  INNER JOIN Workflow.WorkflowHistory on WorkflowHistory.Reference_Id = po.Id
+  AND WorkflowHistory.RecStatus = 1 
+  INNER JOIN Patient.Patient on Patient.Id = po.Patient_Id
+  INNER JOIN Common.Person Person on Patient.Id = Person.Id
+  LEFT OUTER JOIN Lookups.PreferredMethodOfContact	ON Patient.PreferredMethodOfContact_Id = PreferredMethodOfContact.Id
+     AND PreferredMethodOfContact.IsActive = 1	
+  INNER JOIN Common.EmailAddress on EmailAddress.Party_Id = Patient.Id
+  INNER JOIN Amber.TransplantWelcomeEmails ON TransplantWelcomeEmails.PatientId = Patient.Id and EmailNumber = 2
+   LEFT JOIN (
+	SELECT DISTINCT [PatientStatusHistory].[Patient_Id]
+		,[PatientStatusHistory].[Status_Id]
+		,ROW_NUMBER() OVER (
+			PARTITION BY [Patient_Id] ORDER BY [EffectiveDate] DESC
+			) AS [Rank]
+	FROM [Patient].[PatientStatusHistory]
+	WHERE [PatientStatusHistory].[RecStatus] = 1
+	) [PatientStatusHistory] ON [Patient].[Id] = [PatientStatusHistory].[Patient_Id]
+	AND [PatientStatusHistory].[Rank] = 1
+ 
+WHERE 
+  po.RecStatus = 1
+  AND [PatientStatusHistory].[Status_Id] != 2
+  AND  NOT EXISTS (SELECT 1 FROM Amber.TransplantWelcomeEmails where TransplantWelcomeEmails.PatientId = Patient.Id AND EmailNumber = 3)
+  AND Patient.Team_Id = 500013
+  and (PreferredMethodOfContact_Id IS NULL OR PreferredMethodOfContact_Id != 8)
+  and EmailAddress.Address like '%@%'
+  AND CAST(TransplantWelcomeEmails.DateInserted AS DATE) &lt;= CAST(DATEADD(DD,-30,GETDATE()) AS DATE)
+
+  UNION
+
+  SELECT DISTINCT 
+	Patient.Id as PatientId,
+	Person.FirstName + ' ' + Person.LastName as PatientName,
+	EmailAddress.Address as EmailAddress,
+     4 as EmailNumber
+FROM Prescription.PatientOrder po
+   INNER JOIN Prescription.Prescription on Prescription.PatientOrder_Id = po.Id
+  AND Prescription.RecStatus = 1
+  INNER JOIN Workflow.WorkflowHistory on WorkflowHistory.Reference_Id = po.Id
+  AND WorkflowHistory.RecStatus = 1 
+  INNER JOIN Patient.Patient on Patient.Id = po.Patient_Id
+  INNER JOIN Common.Person Person on Patient.Id = Person.Id
+  LEFT OUTER JOIN Lookups.PreferredMethodOfContact	ON Patient.PreferredMethodOfContact_Id = PreferredMethodOfContact.Id
+     AND PreferredMethodOfContact.IsActive = 1	
+  INNER JOIN Common.EmailAddress on EmailAddress.Party_Id = Patient.Id
+  INNER JOIN Amber.TransplantWelcomeEmails ON TransplantWelcomeEmails.PatientId = Patient.Id and EmailNumber = 3
+   LEFT JOIN (
+	SELECT DISTINCT [PatientStatusHistory].[Patient_Id]
+		,[PatientStatusHistory].[Status_Id]
+		,ROW_NUMBER() OVER (
+			PARTITION BY [Patient_Id] ORDER BY [EffectiveDate] DESC
+			) AS [Rank]
+	FROM [Patient].[PatientStatusHistory]
+	WHERE [PatientStatusHistory].[RecStatus] = 1
+	) [PatientStatusHistory] ON [Patient].[Id] = [PatientStatusHistory].[Patient_Id]
+	AND [PatientStatusHistory].[Rank] = 1
+ 
+WHERE 
+  po.RecStatus = 1
+  AND [PatientStatusHistory].[Status_Id] != 2
+  AND  NOT EXISTS (SELECT 1 FROM Amber.TransplantWelcomeEmails where TransplantWelcomeEmails.PatientId = Patient.Id AND EmailNumber = 4)
+  AND Patient.Team_Id = 500013
+  and (PreferredMethodOfContact_Id IS NULL OR PreferredMethodOfContact_Id != 8)
+  and EmailAddress.Address like '%@%'
+  AND CAST(TransplantWelcomeEmails.DateInserted AS DATE) &lt;= CAST(DATEADD(DD,-30,GETDATE()) AS DATE)
+
+  UNION
+
+  SELECT DISTINCT 
+	Patient.Id as PatientId,
+	Person.FirstName + ' ' + Person.LastName as PatientName,
+	EmailAddress.Address as EmailAddress,
+  5 as EmailNumber
+FROM Prescription.PatientOrder po
+   INNER JOIN Prescription.Prescription on Prescription.PatientOrder_Id = po.Id
+  AND Prescription.RecStatus = 1
+  INNER JOIN Workflow.WorkflowHistory on WorkflowHistory.Reference_Id = po.Id
+  AND WorkflowHistory.RecStatus = 1 
+  INNER JOIN Patient.Patient on Patient.Id = po.Patient_Id
+  INNER JOIN Common.Person Person on Patient.Id = Person.Id
+  LEFT OUTER JOIN Lookups.PreferredMethodOfContact	ON Patient.PreferredMethodOfContact_Id = PreferredMethodOfContact.Id
+     AND PreferredMethodOfContact.IsActive = 1	
+  INNER JOIN Common.EmailAddress on EmailAddress.Party_Id = Patient.Id
+  INNER JOIN Amber.TransplantWelcomeEmails ON TransplantWelcomeEmails.PatientId = Patient.Id and EmailNumber = 4
+   LEFT JOIN (
+	SELECT DISTINCT [PatientStatusHistory].[Patient_Id]
+		,[PatientStatusHistory].[Status_Id]
+		,ROW_NUMBER() OVER (
+			PARTITION BY [Patient_Id] ORDER BY [EffectiveDate] DESC
+			) AS [Rank]
+	FROM [Patient].[PatientStatusHistory]
+	WHERE [PatientStatusHistory].[RecStatus] = 1
+	) [PatientStatusHistory] ON [Patient].[Id] = [PatientStatusHistory].[Patient_Id]
+	AND [PatientStatusHistory].[Rank] = 1
+ 
+WHERE 
+  po.RecStatus = 1
+  AND [PatientStatusHistory].[Status_Id] != 2
+  AND  NOT EXISTS (SELECT 1 FROM Amber.TransplantWelcomeEmails where TransplantWelcomeEmails.PatientId = Patient.Id AND EmailNumber = 5)
+  AND Patient.Team_Id = 500013
+  and (PreferredMethodOfContact_Id IS NULL OR PreferredMethodOfContact_Id != 8)
+  and EmailAddress.Address like '%@%'
+  AND CAST(TransplantWelcomeEmails.DateInserted AS DATE) &lt;= CAST(DATEADD(DD,-30,GETDATE()) AS DATE)
+
+   UNION
+
+  SELECT DISTINCT 
+	Patient.Id as PatientId,
+	Person.FirstName + ' ' + Person.LastName as PatientName,
+	EmailAddress.Address as EmailAddress,
+    6 as EmailNumber
+FROM Prescription.PatientOrder po
+   INNER JOIN Prescription.Prescription on Prescription.PatientOrder_Id = po.Id
+  AND Prescription.RecStatus = 1
+  INNER JOIN Workflow.WorkflowHistory on WorkflowHistory.Reference_Id = po.Id
+  AND WorkflowHistory.RecStatus = 1 
+  INNER JOIN Patient.Patient on Patient.Id = po.Patient_Id
+  INNER JOIN Common.Person Person on Patient.Id = Person.Id
+  LEFT OUTER JOIN Lookups.PreferredMethodOfContact	ON Patient.PreferredMethodOfContact_Id = PreferredMethodOfContact.Id
+     AND PreferredMethodOfContact.IsActive = 1	
+  INNER JOIN Common.EmailAddress on EmailAddress.Party_Id = Patient.Id
+  INNER JOIN Amber.TransplantWelcomeEmails ON TransplantWelcomeEmails.PatientId = Patient.Id and EmailNumber = 5
+   LEFT JOIN (
+	SELECT DISTINCT [PatientStatusHistory].[Patient_Id]
+		,[PatientStatusHistory].[Status_Id]
+		,ROW_NUMBER() OVER (
+			PARTITION BY [Patient_Id] ORDER BY [EffectiveDate] DESC
+			) AS [Rank]
+	FROM [Patient].[PatientStatusHistory]
+	WHERE [PatientStatusHistory].[RecStatus] = 1
+	) [PatientStatusHistory] ON [Patient].[Id] = [PatientStatusHistory].[Patient_Id]
+	AND [PatientStatusHistory].[Rank] = 1
+ 
+WHERE 
+  po.RecStatus = 1
+  AND [PatientStatusHistory].[Status_Id] != 2
+  AND  NOT EXISTS (SELECT 1 FROM Amber.TransplantWelcomeEmails where TransplantWelcomeEmails.PatientId = Patient.Id AND EmailNumber = 6)
+  AND Patient.Team_Id = 500013
+  and (PreferredMethodOfContact_Id IS NULL OR PreferredMethodOfContact_Id != 8)
+  and EmailAddress.Address like '%@%'
+  AND CAST(TransplantWelcomeEmails.DateInserted AS DATE) &lt;= CAST(DATEADD(DD,-30,GETDATE()) AS DATE)</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether to allow non-string external columns to be implicitly converted to strings at the output columns."
+                  name="AllowImplicitStringConversion">true</property>
+                <property
+                  dataType="System.String"
+                  description="The Source database table name."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the mode to retrieve external column information"
+                  name="AccessMode"
+                  typeConverter="Microsoft.SqlServer.Dts.Pipeline.DataReaderSourceAdapter+EnumToStringConverter">2</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.DataReaderSourceAdapter</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load history table\ADO NET Source.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[ambromactsql.CareTend_Amber_Prod 1]"
+                  connectionManagerRefId="Package.ConnectionManagers[ambromactsql.CareTend_Amber_Prod 1]"
+                  description="Managed connection manager"
+                  name="IDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output]"
+                  name="ADO NET Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[PatientId]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[PatientId]"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[PatientId]"
+                      name="PatientId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[PatientName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[PatientName]"
+                      length="101"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[PatientName]"
+                      name="PatientName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[EmailAddress]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[EmailAddress]"
+                      length="100"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[EmailAddress]"
+                      name="EmailAddress"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[EmailNumber]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[EmailNumber]"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[EmailNumber]"
+                      name="EmailNumber"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[PatientId]"
+                      dataType="i8"
+                      name="PatientId" />
+                    <externalMetadataColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[PatientName]"
+                      dataType="wstr"
+                      length="101"
+                      name="PatientName" />
+                    <externalMetadataColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[EmailAddress]"
+                      dataType="wstr"
+                      length="100"
+                      name="EmailAddress" />
+                    <externalMetadataColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[EmailNumber]"
+                      dataType="i4"
+                      name="EmailNumber" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output]"
+                  isErrorOut="true"
+                  name="ADO NET Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[PatientId]"
+                      dataType="i8"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[PatientId]"
+                      name="PatientId" />
+                    <outputColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[PatientName]"
+                      dataType="wstr"
+                      length="101"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[PatientName]"
+                      name="PatientName" />
+                    <outputColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[EmailAddress]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[EmailAddress]"
+                      name="EmailAddress" />
+                    <outputColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[EmailNumber]"
+                      dataType="i4"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[EmailNumber]"
+                      name="EmailNumber" />
+                    <outputColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load history table\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Amber].[TransplantWelcomeEmails]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load history table\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Prod]"
+                  connectionManagerRefId="Package.ConnectionManagers[Prod]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PatientId]"
+                      cachedDataType="i8"
+                      cachedName="PatientId"
+                      externalMetadataColumnId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PatientId]"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[PatientId]" />
+                    <inputColumn
+                      refId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PatientName]"
+                      cachedDataType="wstr"
+                      cachedLength="101"
+                      cachedName="PatientName"
+                      externalMetadataColumnId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PatientName]"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[PatientName]" />
+                    <inputColumn
+                      refId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EmailAddress]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="EmailAddress"
+                      externalMetadataColumnId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EmailAddress]"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[EmailAddress]" />
+                    <inputColumn
+                      refId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EmailNumber]"
+                      cachedDataType="i4"
+                      cachedName="EmailNumber"
+                      externalMetadataColumnId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EmailNumber]"
+                      lineageId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output].Columns[EmailNumber]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DateInserted]"
+                      dataType="dbTimeStamp"
+                      name="DateInserted" />
+                    <externalMetadataColumn
+                      refId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PatientId]"
+                      dataType="i8"
+                      name="PatientId" />
+                    <externalMetadataColumn
+                      refId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PatientName]"
+                      dataType="wstr"
+                      length="255"
+                      name="PatientName" />
+                    <externalMetadataColumn
+                      refId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EmailAddress]"
+                      dataType="wstr"
+                      length="255"
+                      name="EmailAddress" />
+                    <externalMetadataColumn
+                      refId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Opens]"
+                      dataType="i8"
+                      name="Opens" />
+                    <externalMetadataColumn
+                      refId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LastOpenDate]"
+                      dataType="dbTimeStamp"
+                      name="LastOpenDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EmailNumber]"
+                      dataType="i8"
+                      name="EmailNumber" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load history table\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load history table\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load history table\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load history table\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load history table\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load history table.Paths[ADO NET Source Output]"
+              endId="Package\Load history table\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="ADO NET Source Output"
+              startId="Package\Load history table\ADO NET Source.Outputs[ADO NET Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Send tracking info to patients"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{58A3768A-0E3B-400D-A631-695885D6127F}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Send tracking info to patients">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachADOEnumerator"
+        DTS:DTSID="{A69537AD-BE46-4BB7-9A37-324B4863CB4A}"
+        DTS:ObjectName="{6BCD5CD7-E9D3-40B5-8E0A-91C88913E8A6}">
+        <DTS:ObjectData>
+          <FEEADO
+            EnumType="EnumerateRowsInFirstTable"
+            VarName="User::PatientResult" />
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Send tracking info to patients\Send transplant email"
+          DTS:CreationName="Microsoft.ScriptTask"
+          DTS:Description="Script Task"
+          DTS:DTSID="{730243BD-4EB2-4D5F-87C8-28B2A8AC33CD}"
+          DTS:ExecutableType="Microsoft.ScriptTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Send transplant email"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ScriptProject
+              Name="ST_5bf24b32a67d4063a8494ac37d00a5e9"
+              VSTAMajorVersion="15"
+              VSTAMinorVersion="0"
+              Language="CSharp"
+              ReadOnlyVariables="User::EmailAddress,User::TemplateId">
+              <ProjectItem
+                Name="Properties\Resources.resx"
+                Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+</root>]]></ProjectItem>
+              <ProjectItem
+                Name="Properties\Settings.Designer.cs"
+                Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_16d1b1c15f6b4d6698a52d803099d29e.Properties.Settings.get_Default():ST_16d1b1c15f6b4d6698a52d803099d29e.Properties.Sett" +
+    "ings")]
+
+namespace ST_16d1b1c15f6b4d6698a52d803099d29e.Properties {
+    
+    
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+        
+        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+        private static Settings defaultInstance = new Settings();
+        
+        public static Settings Default {
+            get {
+                return defaultInstance;
+            }
+        }
+    }
+}]]></ProjectItem>
+              <ProjectItem
+                Name="ScriptMain.cs"
+                Encoding="UTF8"><![CDATA[#region Help:  Introduction to the script task
+/* The Script Task allows you to perform virtually any operation that can be accomplished in
+ * a .Net application within the context of an Integration Services control flow. 
+ * 
+ * Expand the other regions which have "Help" prefixes for examples of specific ways to use
+ * Integration Services features within this script task. */
+#endregion
+
+
+#region Namespaces
+using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Runtime;
+using System.Windows.Forms;
+using SendGridGeneric;
+using SendGrid;
+#endregion
+
+namespace ST_16d1b1c15f6b4d6698a52d803099d29e
+{
+    /// <summary>
+    /// ScriptMain is the entry point class of the script.  Do not change the name, attributes,
+    /// or parent of this class.
+    /// </summary>
+	[Microsoft.SqlServer.Dts.Tasks.ScriptTask.SSISScriptTaskEntryPointAttribute]
+	public partial class ScriptMain : Microsoft.SqlServer.Dts.Tasks.ScriptTask.VSTARTScriptObjectModelBase
+	{
+        #region Help:  Using Integration Services variables and parameters in a script
+        /* To use a variable in this script, first ensure that the variable has been added to 
+         * either the list contained in the ReadOnlyVariables property or the list contained in 
+         * the ReadWriteVariables property of this script task, according to whether or not your
+         * code needs to write to the variable.  To add the variable, save this script, close this instance of
+         * Visual Studio, and update the ReadOnlyVariables and 
+         * ReadWriteVariables properties in the Script Transformation Editor window.
+         * To use a parameter in this script, follow the same steps. Parameters are always read-only.
+         * 
+         * Example of reading from a variable:
+         *  DateTime startTime = (DateTime) Dts.Variables["System::StartTime"].Value;
+         * 
+         * Example of writing to a variable:
+         *  Dts.Variables["User::myStringVariable"].Value = "new value";
+         * 
+         * Example of reading from a package parameter:
+         *  int batchId = (int) Dts.Variables["$Package::batchId"].Value;
+         *  
+         * Example of reading from a project parameter:
+         *  int batchId = (int) Dts.Variables["$Project::batchId"].Value;
+         * 
+         * Example of reading from a sensitive project parameter:
+         *  int batchId = (int) Dts.Variables["$Project::batchId"].GetSensitiveValue();
+         * */
+
+        #endregion
+
+        #region Help:  Firing Integration Services events from a script
+        /* This script task can fire events for logging purposes.
+         * 
+         * Example of firing an error event:
+         *  Dts.Events.FireError(18, "Process Values", "Bad value", "", 0);
+         * 
+         * Example of firing an information event:
+         *  Dts.Events.FireInformation(3, "Process Values", "Processing has started", "", 0, ref fireAgain)
+         * 
+         * Example of firing a warning event:
+         *  Dts.Events.FireWarning(14, "Process Values", "No values received for input", "", 0);
+         * */
+        #endregion
+
+        #region Help:  Using Integration Services connection managers in a script
+        /* Some types of connection managers can be used in this script task.  See the topic 
+         * "Working with Connection Managers Programatically" for details.
+         * 
+         * Example of using an ADO.Net connection manager:
+         *  object rawConnection = Dts.Connections["Sales DB"].AcquireConnection(Dts.Transaction);
+         *  SqlConnection myADONETConnection = (SqlConnection)rawConnection;
+         *  //Use the connection in some code here, then release the connection
+         *  Dts.Connections["Sales DB"].ReleaseConnection(rawConnection);
+         *
+         * Example of using a File connection manager
+         *  object rawConnection = Dts.Connections["Prices.zip"].AcquireConnection(Dts.Transaction);
+         *  string filePath = (string)rawConnection;
+         *  //Use the connection in some code here, then release the connection
+         *  Dts.Connections["Prices.zip"].ReleaseConnection(rawConnection);
+         * */
+        #endregion
+
+        #region Class Helper
+        static ScriptMain()
+        {
+            AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve);
+        }
+        static System.Reflection.Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
+        {
+          
+            if (args.Name.Contains("SendGridGeneric"))
+            {
+                // MessageBox.Show("In SendGrid");
+                string path = @"C:\AmberSSIS_DLL\SendGrid";
+                return System.Reflection.Assembly.LoadFile(System.IO.Path.Combine(path, "SendGridGeneric.dll"));
+            }
+            if (args.Name.Contains("SendGrid"))
+            {
+                // MessageBox.Show("In SendGrid");
+                string path = @"C:\AmberSSIS_DLL\SendGrid";
+                return System.Reflection.Assembly.LoadFile(System.IO.Path.Combine(path, "SendGrid.dll"));
+            }
+            if (args.Name.Contains("System.Net.Http"))
+            {
+                //MessageBox.Show("In System.Net.Http");
+                string path = @"C:\AmberSSIS_DLL\SendGrid";
+                return System.Reflection.Assembly.LoadFile(System.IO.Path.Combine(path, "System.Net.Http.dll"));
+            }
+            if (args.Name.Contains("System.Security.Cryptography.Primitives"))
+            {
+                // MessageBox.Show("In System.Security.Cryptography.Primitives");
+                string path = @"C:\AmberSSIS_DLL\SendGrid";
+                return System.Reflection.Assembly.LoadFile(System.IO.Path.Combine(path, "System.Security.Cryptography.Primitives.dll"));
+            }
+            if (args.Name.Contains("Newtonsoft.Json"))
+            {
+                // MessageBox.Show("In Newtonsoft.Json");
+                string path = @"C:\AmberSSIS_DLL\SendGrid";
+                return System.Reflection.Assembly.LoadFile(System.IO.Path.Combine(path, "Newtonsoft.Json.dll"));
+            }
+
+            return null;
+        }
+        #endregion
+
+        /// <summary>
+        /// This method is called when this script task executes in the control flow.
+        /// Before returning from this method, set the value of Dts.TaskResult to indicate success or failure.
+        /// To open Help, press F1.
+        /// </summary>
+        public void Main()
+		{
+            //MessageBox.Show("In Main method");
+            SendGridGeneric.SendGridGenericManager.SendEmail(Dts.Variables["User::TemplateId"].Value.ToString(), Dts.Variables["User::EmailAddress"].Value.ToString(), "Transplant", "info@amberpharmacy.com", "Amber Pharmacy");
+
+            Dts.TaskResult = (int)ScriptResults.Success;
+		}
+
+        #region ScriptResults declaration
+        /// <summary>
+        /// This enum provides a convenient shorthand within the scope of this class for setting the
+        /// result of the script.
+        /// 
+        /// This code was generated automatically.
+        /// </summary>
+        enum ScriptResults
+        {
+            Success = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Success,
+            Failure = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Failure
+        };
+        #endregion
+
+	}
+}]]></ProjectItem>
+              <ProjectItem
+                Name="ST_5bf24b32a67d4063a8494ac37d00a5e9.csproj"
+                Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectTypeGuids>{30D016F9-3734-4E33-A861-5E7D899E18F3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F7098E03-3BB4-49B7-AB50-533D40CD0DF6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ST_16d1b1c15f6b4d6698a52d803099d29e</RootNamespace>
+    <AssemblyName>ST_5bf24b32a67d4063a8494ac37d00a5e9</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>true</ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>
+    <TargetFrameworkProfile></TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>.\bin\Debug\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\Release\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="SendGrid">
+      <HintPath>C:\AmberSSIS_DLL\SendGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="SendGridGeneric">
+      <HintPath>C:\AmberSSIS_DLL\SendGridGeneric.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http">
+      <HintPath>C:\AmberSSIS_DLL\SendGrid\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.SqlServer.ManagedDTS, Version=15.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.ScriptTask, Version=15.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ScriptMain.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <!-- Include the build rules for a C# project.-->
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{30D016F9-3734-4E33-A861-5E7D899E18F3}">
+        <ProjectProperties HostName="VSTAHostName" HostPackage="{B3A685AA-7EAF-4BC6-9940-57959FA5AC07}" ApplicationType="usd" Language="cs" TemplatesPath="" />
+        <Host Name="ScriptTask" />
+        <ProjectClient>
+          <HostIdentifier>SSIS_ST150</HostIdentifier>
+        </ProjectClient>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>]]></ProjectItem>
+              <ProjectItem
+                Name="Project"
+                Encoding="UTF16LE"><![CDATA[<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
+<c:Project xmlns:c="http://schemas.microsoft.com/codeprojectml/2010/08/main" xmlns:msb="http://schemas.microsoft.com/developer/msbuild/2003" runtimeVersion="4.0" schemaVersion="1.0">
+  <msb:PropertyGroup>
+    <msb:CodeName>ST_5bf24b32a67d4063a8494ac37d00a5e9</msb:CodeName>
+    <msb:Language>msBuild</msb:Language>
+    <msb:DisplayName>ST_5bf24b32a67d4063a8494ac37d00a5e9</msb:DisplayName>
+    <msb:ProjectId>{78F5EE7A-512C-4720-BFC9-C334CF271350}</msb:ProjectId>
+  </msb:PropertyGroup>
+  <msb:ItemGroup>
+    <msb:Project Include="ST_5bf24b32a67d4063a8494ac37d00a5e9.csproj" />
+    <msb:File Include="Properties\Settings.Designer.cs" />
+    <msb:File Include="Properties\Settings.settings" />
+    <msb:File Include="Properties\AssemblyInfo.cs" />
+    <msb:File Include="Properties\Resources.resx" />
+    <msb:File Include="Properties\Resources.Designer.cs" />
+    <msb:File Include="ScriptMain.cs" />
+  </msb:ItemGroup>
+</c:Project>]]></ProjectItem>
+              <ProjectItem
+                Name="Properties\AssemblyInfo.cs"
+                Encoding="UTF8"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
+//
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("ST_16d1b1c15f6b4d6698a52d803099d29e")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("ST_16d1b1c15f6b4d6698a52d803099d29e")]
+[assembly: AssemblyCopyright("Copyright @  2019")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
+
+[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
+              <ProjectItem
+                Name="Properties\Settings.settings"
+                Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></ProjectItem>
+              <ProjectItem
+                Name="Properties\Resources.Designer.cs"
+                Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_16d1b1c15f6b4d6698a52d803099d29e.Properties.Resources.get_ResourceManager():System.Resources.Resou" +
+    "rceManager")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_16d1b1c15f6b4d6698a52d803099d29e.Properties.Resources.get_Culture():System.Globalization.CultureIn" +
+    "fo")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_16d1b1c15f6b4d6698a52d803099d29e.Properties.Resources.set_Culture(System.Globalization.CultureInfo" +
+    "):Void")]
+
+namespace ST_16d1b1c15f6b4d6698a52d803099d29e.Properties {
+    
+    
+    /// <summary>
+    ///   A strongly-typed resource class, for looking up localized strings, etc.
+    /// </summary>
+    // This class was auto-generated by the StronglyTypedResourceBuilder
+    // class via a tool like ResGen or Visual Studio.
+    // To add or remove a member, edit your .ResX file then rerun ResGen
+    // with the /str option, or rebuild your VS project.
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    internal class Resources {
+        
+        private static global::System.Resources.ResourceManager resourceMan;
+        
+        private static global::System.Globalization.CultureInfo resourceCulture;
+        
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        internal Resources() {
+        }
+        
+        /// <summary>
+        ///   Returns the cached ResourceManager instance used by this class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Resources.ResourceManager ResourceManager {
+            get {
+                if ((resourceMan == null)) {
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ST_16d1b1c15f6b4d6698a52d803099d29e.Properties.Resources", typeof(Resources).Assembly);
+                    resourceMan = temp;
+                }
+                return resourceMan;
+            }
+        }
+        
+        /// <summary>
+        ///   Overrides the current thread's CurrentUICulture property for all
+        ///   resource lookups using this strongly typed resource class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Globalization.CultureInfo Culture {
+            get {
+                return resourceCulture;
+            }
+            set {
+                resourceCulture = value;
+            }
+        }
+    }
+}]]></ProjectItem>
+              <BinaryItem
+                Name="ST_5bf24b32a67d4063a8494ac37d00a5e9.dll">TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAgAAAAA4fug4AtAnNIbgBTM0hVGhpcyBwcm9ncmFtIGNhbm5vdCBiZSBydW4gaW4gRE9TIG1v
+ZGUuDQ0KJAAAAAAAAABQRQAATAEDAEYO1WUAAAAAAAAAAOAAIiALATAAABQAAAAIAAAAAAAA8jIA
+AAAgAAAAQAAAAAAAEAAgAAAAAgAABAAAAAAAAAAGAAAAAAAAAACAAAAAAgAAAAAAAAMAYIUAABAA
+ABAAAAAAEAAAEAAAAAAAABAAAAAAAAAAAAAAAKAyAABPAAAAAEAAAHgEAAAAAAAAAAAAAAAAAAAA
+AAAAAGAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAIAAACAAAAAAAAAAAAAAACCAAAEgAAAAAAAAAAAAAAC50ZXh0AAAA+BIAAAAgAAAAFAAAAAIA
+AAAAAAAAAAAAAAAAACAAAGAucnNyYwAAAHgEAAAAQAAAAAYAAAAWAAAAAAAAAAAAAAAAAABAAABA
+LnJlbG9jAAAMAAAAAGAAAAACAAAAHAAAAAAAAAAAAAAAAAAAQAAAQgAAAAAAAAAAAAAAAAAAAADU
+MgAAAAAAAEgAAAACAAUAECIAANgPAAABAAAAAAAAAOgxAAC4AAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAF4oEAAAChT+BgIAAAZzEQAACm8SAAAKKhMwAgDFAAAAAAAA
+AANvEwAACnIBAABwbxQAAAosFXIhAABwclUAAHAoFQAACigWAAAKKgNvEwAACnJ9AABwbxQAAAos
+FXIhAABwco8AAHAoFQAACigWAAAKKgNvEwAACnKpAABwbxQAAAosFXIhAABwcskAAHAoFQAACigW
+AAAKKgNvEwAACnLxAABwbxQAAAosFXIhAABwckEBAHAoFQAACigWAAAKKgNvEwAACnKZAQBwbxQA
+AAosFXIhAABwcrkBAHAoFQAACigWAAAKKhQqAAAAEzAFAGAAAAAAAAAAAigXAAAKbxgAAApy4QEA
+cG8ZAAAKbxoAAApvGwAACgIoFwAACm8YAAAKcgMCAHBvGQAACm8aAAAKbxsAAApyKQIAcHI/AgBw
+cm0CAHAoHAAACiYCKBcAAAoWbx0AAAoqHgIoHgAACioeAigfAAAKKq5+AQAABC0ecosCAHDQAwAA
+AiggAAAKbyEAAApzIgAACoABAAAEfgEAAAQqGn4CAAAEKh4CgAIAAAQqGn4DAAAEKh4CKCMAAAoq
+LnMKAAAGgAMAAAQqAABCU0pCAQABAAAAAAAMAAAAdjQuMC4zMDMxOQAAAAAFAGwAAABMBAAAI34A
+ALgEAAB4BgAAI1N0cmluZ3MAAAAAMAsAAAADAAAjVVMAMA4AABAAAAAjR1VJRAAAAEAOAACYAQAA
+I0Jsb2IAAAAAAAAAAgAAAVcdoAEJAwAAAPoBMwAWAAABAAAAJAAAAAUAAAAGAAAACwAAAAMAAAAj
+AAAAAgAAABAAAAACAAAAAwAAAAQAAAABAAAABQAAAAEAAAABAAAAAAAOBAEAAAAAAAYAfQIsBQYA
+DAMsBQYAyQEZBQ8AoAUAAAYA9gGoBAYAYAKoBAYAQQKoBAYA8wKoBAYAnQKoBAYAtgKoBAYADQKo
+BAYAKAJsAwoA0QKzAwoASAGzAwYAbwaoBAYASQY/BAYA9QU/BAYARgQ/BAYArAEZBQYA6ARMBQYA
+ugSTBA4AfAHuAw4A3QHuAw4AZAF+BAYAkQEsBQYAYgQ/BAYA+AQ/BAYAiAM/BAYAjwMuAAoA3AOz
+AxIA4gXrABIArADrABYAzQRoAAYA1wMLBgYAEwE/BAYAtQA/BAAAAAAlAAAAAAABAAEAAQAAAFcE
+eAA5AAEAAQAAABAAUwWvBUEAAQAFAAABEADsBa8FYQADAAkAAwEAADsGAABJAAQADAARAEsEkgAR
+ADgBlgARAJwAmgAGBlcAngBWgCsGoQBWgBgBoQBQIAAAAACRGBIFpQABAGggAAAAAJEATgOpAAEA
+PCEAAAAAhgBdBAYAAwCoIQAAAACGGAwFBgADALAhAAAAAIMYDAUGAAMAuCEAAAAAkwjkBLEAAwDk
+IQAAAACTCCABtgADAOshAAAAAJMILAG7AAMA8yEAAAAAlghQBsEABAD6IQAAAACGGAwFBgAEAAIi
+AAAAAJEYEgWlAAQAAAABAMYEAAACAAYGAAABADQDCQAMBQEAEQAMBQYAGQAMBQoAKQAMBRAAMQAM
+BRAAOQAMBRAAQQAMBRAASQAMBRAAUQAMBRAAWQAMBRAAYQAMBRAAaQAMBQYAmQAMBQYAuQAMBRUA
+yQAMBQYA0QBsBBsA2QAMBSAA0QA6AyYAiQDiACwA4QAiBjAA6QALATUAeQDZADsAcQAzBkEA8QDe
+BUYA+QA2BEsAAQEqA1IAgQCGAywACQEEBFYA8QBcBgEAcQAMBQYAgQAMBQYAGQHHAGEAGQFrBmoA
+oQAMBW8AwQAMBQYACAAUAIgACAAYAI0AKQBzAP0ALgALANUALgATAN4ALgAbAP0ALgAjAAYBLgAr
+AC8BLgAzAC8BLgA7AC8BLgBDAAYBLgBLADUBLgBTAC8BLgBbAEwBQwBjAI0ASQBzAP0AYQB7AI0A
+YwBrAI0AAwABAAQAAwAAAOgExgAAAEABywAAAFQG0AACAAYAAwACAAcABQABAAgABQACAAkABwAE
+gAAAAQAAAHAiM2cAAAAAAAABAAAABAAAAAAAAAAAAAAAdgBfAAAAAAAPAAAAAAAAAAAAAAB/AJQD
+AAAAAAQAAAAAAAAAAAAAAHYAPwQAAAAADwAAAAAAAAAAAAAAfwA4AAAAAAABAAAAAAAAAAAAAAAA
+AGgAAAAAAAAAAAABAAAAXQUAAAUAAgAAAABTVF81YmYyNGIzMmE2N2Q0MDYzYTg0OTRhYzM3ZDAw
+YTVlOQA8TW9kdWxlPgBTeXN0ZW0uSU8ATWljcm9zb2Z0LlNxbFNlcnZlci5NYW5hZ2VkRFRTAHZh
+bHVlX18AbXNjb3JsaWIAU2VuZEdyaWRHZW5lcmljAFNUXzE2ZDFiMWMxNWY2YjRkNjY5OGE1MmQ4
+MDMwOTlkMjllAGRlZmF1bHRJbnN0YW5jZQBWYXJpYWJsZQBSdW50aW1lVHlwZUhhbmRsZQBHZXRU
+eXBlRnJvbUhhbmRsZQBMb2FkRmlsZQBnZXRfTmFtZQBNaWNyb3NvZnQuU3FsU2VydmVyLkR0cy5S
+dW50aW1lAENvbWJpbmUAVHlwZQBGYWlsdXJlAGdldF9DdWx0dXJlAHNldF9DdWx0dXJlAHJlc291
+cmNlQ3VsdHVyZQBWU1RBUlRTY3JpcHRPYmplY3RNb2RlbEJhc2UAQXBwbGljYXRpb25TZXR0aW5n
+c0Jhc2UARWRpdG9yQnJvd3NhYmxlU3RhdGUAQ29tcGlsZXJHZW5lcmF0ZWRBdHRyaWJ1dGUARGVi
+dWdnZXJOb25Vc2VyQ29kZUF0dHJpYnV0ZQBEZWJ1Z2dhYmxlQXR0cmlidXRlAEVkaXRvckJyb3dz
+YWJsZUF0dHJpYnV0ZQBBc3NlbWJseVRpdGxlQXR0cmlidXRlAEFzc2VtYmx5VHJhZGVtYXJrQXR0
+cmlidXRlAFRhcmdldEZyYW1ld29ya0F0dHJpYnV0ZQBBc3NlbWJseUNvbmZpZ3VyYXRpb25BdHRy
+aWJ1dGUAQXNzZW1ibHlEZXNjcmlwdGlvbkF0dHJpYnV0ZQBDb21waWxhdGlvblJlbGF4YXRpb25z
+QXR0cmlidXRlAEFzc2VtYmx5UHJvZHVjdEF0dHJpYnV0ZQBBc3NlbWJseUNvcHlyaWdodEF0dHJp
+YnV0ZQBTU0lTU2NyaXB0VGFza0VudHJ5UG9pbnRBdHRyaWJ1dGUAQXNzZW1ibHlDb21wYW55QXR0
+cmlidXRlAFJ1bnRpbWVDb21wYXRpYmlsaXR5QXR0cmlidXRlAGdldF9WYWx1ZQB2YWx1ZQBhZGRf
+QXNzZW1ibHlSZXNvbHZlAEN1cnJlbnREb21haW5fQXNzZW1ibHlSZXNvbHZlAFN5c3RlbS5SdW50
+aW1lLlZlcnNpb25pbmcAVG9TdHJpbmcAUGF0aABNaWNyb3NvZnQuU3FsU2VydmVyLlNjcmlwdFRh
+c2sATWljcm9zb2Z0LlNxbFNlcnZlci5EdHMuVGFza3MuU2NyaXB0VGFzawBTY3JpcHRPYmplY3RN
+b2RlbABTeXN0ZW0uQ29tcG9uZW50TW9kZWwAU2VuZEVtYWlsAFNUXzViZjI0YjMyYTY3ZDQwNjNh
+ODQ5NGFjMzdkMDBhNWU5LmRsbABnZXRfSXRlbQBTeXN0ZW0ARW51bQByZXNvdXJjZU1hbgBTY3Jp
+cHRNYWluAEFwcERvbWFpbgBnZXRfQ3VycmVudERvbWFpbgBTeXN0ZW0uQ29uZmlndXJhdGlvbgBT
+eXN0ZW0uR2xvYmFsaXphdGlvbgBTeXN0ZW0uUmVmbGVjdGlvbgBDdWx0dXJlSW5mbwBzZW5kZXIA
+U2VuZEdyaWRHZW5lcmljTWFuYWdlcgBnZXRfUmVzb3VyY2VNYW5hZ2VyAFJlc29sdmVFdmVudEhh
+bmRsZXIALmN0b3IALmNjdG9yAFN5c3RlbS5EaWFnbm9zdGljcwBTeXN0ZW0uUnVudGltZS5Db21w
+aWxlclNlcnZpY2VzAFN5c3RlbS5SZXNvdXJjZXMAU1RfMTZkMWIxYzE1ZjZiNGQ2Njk4YTUyZDgw
+MzA5OWQyOWUuUHJvcGVydGllcy5SZXNvdXJjZXMucmVzb3VyY2VzAERlYnVnZ2luZ01vZGVzAFNU
+XzE2ZDFiMWMxNWY2YjRkNjY5OGE1MmQ4MDMwOTlkMjllLlByb3BlcnRpZXMAZ2V0X1ZhcmlhYmxl
+cwBTZXR0aW5ncwBSZXNvbHZlRXZlbnRBcmdzAGFyZ3MAU3lzdGVtLlRocmVhZGluZy5UYXNrcwBD
+b250YWlucwBTdWNjZXNzAGdldF9EdHMAU2NyaXB0UmVzdWx0cwBPYmplY3QAZ2V0X0RlZmF1bHQA
+c2V0X1Rhc2tSZXN1bHQAZ2V0X0Fzc2VtYmx5AAAfUwBlAG4AZABHAHIAaQBkAEcAZQBuAGUAcgBp
+AGMAADNDADoAXABBAG0AYgBlAHIAUwBTAEkAUwBfAEQATABMAFwAUwBlAG4AZABHAHIAaQBkAAAn
+UwBlAG4AZABHAHIAaQBkAEcAZQBuAGUAcgBpAGMALgBkAGwAbAAAEVMAZQBuAGQARwByAGkAZAAA
+GVMAZQBuAGQARwByAGkAZAAuAGQAbABsAAAfUwB5AHMAdABlAG0ALgBOAGUAdAAuAEgAdAB0AHAA
+ACdTAHkAcwB0AGUAbQAuAE4AZQB0AC4ASAB0AHQAcAAuAGQAbABsAABPUwB5AHMAdABlAG0ALgBT
+AGUAYwB1AHIAaQB0AHkALgBDAHIAeQBwAHQAbwBnAHIAYQBwAGgAeQAuAFAAcgBpAG0AaQB0AGkA
+dgBlAHMAAFdTAHkAcwB0AGUAbQAuAFMAZQBjAHUAcgBpAHQAeQAuAEMAcgB5AHAAdABvAGcAcgBh
+AHAAaAB5AC4AUAByAGkAbQBpAHQAaQB2AGUAcwAuAGQAbABsAAAfTgBlAHcAdABvAG4AcwBvAGYA
+dAAuAEoAcwBvAG4AACdOAGUAdwB0AG8AbgBzAG8AZgB0AC4ASgBzAG8AbgAuAGQAbABsAAAhVQBz
+AGUAcgA6ADoAVABlAG0AcABsAGEAdABlAEkAZAAAJVUAcwBlAHIAOgA6AEUAbQBhAGkAbABBAGQA
+ZAByAGUAcwBzAAAVVAByAGEAbgBzAHAAbABhAG4AdAAALWkAbgBmAG8AQABhAG0AYgBlAHIAcABo
+AGEAcgBtAGEAYwB5AC4AYwBvAG0AAB1BAG0AYgBlAHIAIABQAGgAYQByAG0AYQBjAHkAAHFTAFQA
+XwAxADYAZAAxAGIAMQBjADEANQBmADYAYgA0AGQANgA2ADkAOABhADUAMgBkADgAMAAzADAAOQA5
+AGQAMgA5AGUALgBQAHIAbwBwAGUAcgB0AGkAZQBzAC4AUgBlAHMAbwB1AHIAYwBlAHMAAAAAACl8
+dqHE2AlKrxkx0UCkfSMABCABAQgDIAABBSABARERBCABAQ4FIAEBEVkEAAASaQUgAgEcGAUgAQES
+bQMgAA4EIAECDgUAAg4ODgUAARI9DgQgABJ5BCAAEn0GIAESgIEcAyAAHAoABRKAiQ4ODg4OCAAB
+EoCNEYCRBCAAEj0GIAIBDhI9CLd6XFYZNOCJCImEXc2AgMyRBAAAAAAEAQAAAAMGElEDBhJVAwYS
+EAIGCAMGERQDAAABBwACEj0cEkUEAAASUQQAABJVBQABARJVBAAAEhAECAASUQQIABJVBAgAEhAI
+AQAIAAAAAAAeAQABAFQCFldyYXBOb25FeGNlcHRpb25UaHJvd3MBCAEAAgAAAAAAKAEAI1NUXzE2
+ZDFiMWMxNWY2YjRkNjY5OGE1MmQ4MDMwOTlkMjllAAAFAQAAAAAWAQARQ29weXJpZ2h0IEAgIDIw
+MTkAAEkBABouTkVURnJhbWV3b3JrLFZlcnNpb249djQuNwEAVA4URnJhbWV3b3JrRGlzcGxheU5h
+bWUSLk5FVCBGcmFtZXdvcmsgNC43AAC0AAAAzsrvvgEAAACRAAAAbFN5c3RlbS5SZXNvdXJjZXMu
+UmVzb3VyY2VSZWFkZXIsIG1zY29ybGliLCBWZXJzaW9uPTQuMC4wLjAsIEN1bHR1cmU9bmV1dHJh
+bCwgUHVibGljS2V5VG9rZW49Yjc3YTVjNTYxOTM0ZTA4OSNTeXN0ZW0uUmVzb3VyY2VzLlJ1bnRp
+bWVSZXNvdXJjZVNldAIAAAAAAAAAAAAAAFBBRFBBRFC0AAAAyDIAAAAAAAAAAAAA4jIAAAAgAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAANQyAAAAAAAAAAAAAAAAX0NvckRsbE1haW4AbXNjb3JlZS5kbGwA
+AAAAAP8lACAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAQAQAAAAGAAAgAAAAAAAAAAAAAAAAAAAAQABAAAAMAAAgAAAAAAAAAAAAAAAAAAAAQAAAAAA
+SAAAAFhAAAAaBAAAAAAAAAAAAAAaBDQAAABWAFMAXwBWAEUAUgBTAEkATwBOAF8ASQBOAEYATwAA
+AAAAvQTv/gAAAQAAAAEAM2dwIgAAAQAzZ3AiPwAAAAAAAAAEAAAAAgAAAAAAAAAAAAAAAAAAAEQA
+AAABAFYAYQByAEYAaQBsAGUASQBuAGYAbwAAAAAAJAAEAAAAVAByAGEAbgBzAGwAYQB0AGkAbwBu
+AAAAAAAAALAEegMAAAEAUwB0AHIAaQBuAGcARgBpAGwAZQBJAG4AZgBvAAAAVgMAAAEAMAAwADAA
+MAAwADQAYgAwAAAAGgABAAEAQwBvAG0AbQBlAG4AdABzAAAAAAAAACIAAQABAEMAbwBtAHAAYQBu
+AHkATgBhAG0AZQAAAAAAAAAAAHAAJAABAEYAaQBsAGUARABlAHMAYwByAGkAcAB0AGkAbwBuAAAA
+AABTAFQAXwAxADYAZAAxAGIAMQBjADEANQBmADYAYgA0AGQANgA2ADkAOABhADUAMgBkADgAMAAz
+ADAAOQA5AGQAMgA5AGUAAAA+AA8AAQBGAGkAbABlAFYAZQByAHMAaQBvAG4AAAAAADEALgAwAC4A
+OAA4ADEANgAuADIANgA0ADEAOQAAAAAAcAAoAAEASQBuAHQAZQByAG4AYQBsAE4AYQBtAGUAAABT
+AFQAXwA1AGIAZgAyADQAYgAzADIAYQA2ADcAZAA0ADAANgAzAGEAOAA0ADkANABhAGMAMwA3AGQA
+MAAwAGEANQBlADkALgBkAGwAbAAAAEgAEgABAEwAZQBnAGEAbABDAG8AcAB5AHIAaQBnAGgAdAAA
+AEMAbwBwAHkAcgBpAGcAaAB0ACAAQAAgACAAMgAwADEAOQAAACoAAQABAEwAZQBnAGEAbABUAHIA
+YQBkAGUAbQBhAHIAawBzAAAAAAAAAAAAeAAoAAEATwByAGkAZwBpAG4AYQBsAEYAaQBsAGUAbgBh
+AG0AZQAAAFMAVABfADUAYgBmADIANABiADMAMgBhADYANwBkADQAMAA2ADMAYQA4ADQAOQA0AGEA
+YwAzADcAZAAwADAAYQA1AGUAOQAuAGQAbABsAAAAaAAkAAEAUAByAG8AZAB1AGMAdABOAGEAbQBl
+AAAAAABTAFQAXwAxADYAZAAxAGIAMQBjADEANQBmADYAYgA0AGQANgA2ADkAOABhADUAMgBkADgA
+MAAzADAAOQA5AGQAMgA5AGUAAABCAA8AAQBQAHIAbwBkAHUAYwB0AFYAZQByAHMAaQBvAG4AAAAx
+AC4AMAAuADgAOAAxADYALgAyADYANAAxADkAAAAAAEYADwABAEEAcwBzAGUAbQBiAGwAeQAgAFYA
+ZQByAHMAaQBvAG4AAAAxAC4AMAAuADgAOAAxADYALgAyADYANAAxADkAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAMAAAA9DIAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
+            </ScriptProject>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{5C3220D4-4C8D-4E16-838C-ABCC69377DE5}"
+          DTS:ObjectName="{5C3220D4-4C8D-4E16-838C-ABCC69377DE5}"
+          DTS:ValueIndex="2"
+          DTS:VariableName="User::EmailAddress" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{B74571A9-17F2-484B-8782-BF8F2A55D59B}"
+          DTS:ObjectName="{B74571A9-17F2-484B-8782-BF8F2A55D59B}"
+          DTS:ValueIndex="3"
+          DTS:VariableName="User::TemplateId" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{3327519B-A034-4505-90A3-C93E374CF14C}"
+      DTS:From="Package\Get patients to email"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Load history table" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{76D09F33-A581-4DD5-948D-A435871C9E09}"
+      DTS:From="Package\Load history table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Send tracking info to patients" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="177,42"
+          Id="Package\Get patients to email"
+          TopLeft="74,107.5" />
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Load history table"
+          TopLeft="82,209.5" />
+        <NodeLayout
+          Size="181,42"
+          Id="Package\Send tracking info to patients\Send transplant email"
+          TopLeft="5.5,5.5" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="200,103"
+          Size="200,146"
+          Id="Package\Send tracking info to patients"
+          TopLeft="67.5000000000001,311.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="163,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="163.5,251.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Load history table">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Load history table\OLE DB Destination"
+          TopLeft="395,242" />
+        <NodeLayout
+          Size="158,42"
+          Id="Package\Load history table\ADO NET Source"
+          TopLeft="248,82.4" />
+        <EdgeLayout
+          Id="Package\Load history table.Paths[ADO NET Source Output]"
+          TopLeft="327,124.4">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="153.5,117.6"
+              Start="0,0"
+              End="153.5,110.1">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,54.8" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,54.8"
+                    Point2="0,58.8"
+                    Point3="4,58.8" />
+                  <mssgle:LineSegment
+                    End="149.5,58.8" />
+                  <mssgle:CubicBezierSegment
+                    Point1="149.5,58.8"
+                    Point2="153.5,58.8"
+                    Point3="153.5,62.8" />
+                  <mssgle:LineSegment
+                    End="153.5,110.1" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load history table\ADO NET Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load history table\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
